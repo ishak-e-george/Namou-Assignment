@@ -4,7 +4,7 @@ import { env } from '../../config/env.js';
 import { UnauthorizedError } from '../../shared/errors.js';
 import { authRepository } from './auth.repository.js';
 
-const DUMMY_PASSWORD_HASH = '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy';
+const DUMMY_PASSWORD_HASH = '$2b$12$2.zqyzDeahcLgityYxt7HezDikuftxlezm2Tr2sqUQ.WoCud9Lj1q';
 
 export const authService = {
   async login(email: string, password: string) {

@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     fileParallelism: true,
+    setupFiles: ['./tests/setup.ts'],
     env: {
       NODE_ENV: 'test',
       DATABASE_FILE: ':memory:',
