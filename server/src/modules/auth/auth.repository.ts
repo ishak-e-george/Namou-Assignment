@@ -3,10 +3,10 @@ import type { User } from '../../shared/types.js';
 
 type UserRow = { id: number; email: string; password_hash: string; name: string };
 
-const findByEmailStatement = db.prepare<UserRow, [string]>(
+const findByEmailStatement = db.prepare<[string], UserRow>(
   'SELECT id, email, password_hash, name FROM users WHERE email = ?',
 );
-const findByIdStatement = db.prepare<User, [number]>(
+const findByIdStatement = db.prepare<[number], User>(
   'SELECT id, email, name FROM users WHERE id = ?',
 );
 
