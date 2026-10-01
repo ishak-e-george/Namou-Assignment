@@ -1,5 +1,8 @@
 import bcrypt from 'bcrypt';
-import { pool, withTransaction } from './pool.js';
+import type Database from 'better-sqlite3';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { db, withTransaction } from './database.js';
 
 type ProductSeed = {
   title: string;
@@ -28,27 +31,47 @@ const products: ProductSeed[] = [
   { title: 'Glass Bud Vase', description: 'A compact, clear glass bud vase with a gently tapered neck. Each piece has small variations from hand finishing.', priceCents: 2600, variantType: null, image: 'vase', variants: [['Standard', 5]] },
 ];
 
-async function seed(): Promise<void> {
-  const passwordHash = await bcrypt.hash('namou-demo-2026', 12);
-  await withTransaction(async (client) => {
-    await client.query('TRUNCATE order_items, orders, cart_items, wishlist_items, product_variants, products, users RESTART IDENTITY CASCADE');
-    await client.query('INSERT INTO users (email, password_hash, name) VALUES ($1, $2, $3)', ['demo@example.com', passwordHash, 'Demo User']);
+export function seedDemoData(database: Database.Database, passwordHash: string): void {
+  withTransaction(() => {
+    database.exec(`
+      DELETE FROM order_items;
+      DELETE FROM orders;
+      DELETE FROM cart_items;
+      DELETE FROM wishlist_items;
+      DELETE FROM product_variants;
+      DELETE FROM products;
+      DELETE FROM users;
+    `);
+    const insertUser = database.prepare('INSERT INTO users (email, password_hash, name) VALUES (?, ?, ?)');
+    const insertProduct = database.prepare(`INSERT INTO products
+      (title, description, price_cents, variant_type, image_url) VALUES (?, ?, ?, ?, ?)`);
+    const insertVariant = database.prepare('INSERT INTO product_variants (product_id, label, stock) VALUES (?, ?, ?)');
+
+    insertUser.run('demo@example.com', passwordHash, 'Demo User');
     for (const product of products) {
-      const inserted = await client.query<{ id: number }>(
-        'INSERT INTO products (title, description, price_cents, variant_type, image_url) VALUES ($1, $2, $3, $4, $5) RETURNING id',
-        [product.title, product.description, product.priceCents, product.variantType, `/images/${product.image}.svg`],
-      );
-      for (const [label, stock] of product.variants) {
-        await client.query('INSERT INTO product_variants (product_id, label, stock) VALUES ($1, $2, $3)', [inserted.rows[0]!.id, label, stock]);
-      }
+      const productId = Number(insertProduct.run(
+        product.title,
+        product.description,
+        product.priceCents,
+        product.variantType,
+        `/images/${product.image}.svg`,
+      ).lastInsertRowid);
+      for (const [label, stock] of product.variants) insertVariant.run(productId, label, stock);
     }
   });
+}
+
+async function seed(): Promise<void> {
+  const passwordHash = await bcrypt.hash('namou-demo-2026', 12);
+  seedDemoData(db, passwordHash);
   console.info(`Seeded ${products.length} products and the demo user (demo@example.com).`);
 }
 
-seed()
-  .catch((error: unknown) => {
-    console.error('Seed failed:', error);
-    process.exitCode = 1;
-  })
-  .finally(() => pool.end());
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  seed()
+    .catch((error: unknown) => {
+      console.error('Seed failed:', error);
+      process.exitCode = 1;
+    })
+    .finally(() => db.close());
+}
