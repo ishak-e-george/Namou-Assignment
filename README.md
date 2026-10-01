@@ -4,6 +4,8 @@ A small full stack shop assessment built with Express, SQLite, React, and TypeSc
 
 ## Local setup
 
+Requires Node.js 22 or newer.
+
 1. Copy `.env.example` to `.env` and set a private JWT secret for local use.
 2. Install dependencies: `npm install`.
 3. Apply the schema: `npm run migrate`.
