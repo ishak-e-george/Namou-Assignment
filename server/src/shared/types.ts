@@ -3,11 +3,9 @@ import { UnauthorizedError } from './errors.js';
 
 export type User = { id: number; email: string; name: string };
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: User;
-    }
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: User;
   }
 }
 

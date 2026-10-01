@@ -5,7 +5,6 @@ import { AuthProvider } from './features/auth/AuthProvider.js';
 import { router } from './router.js';
 
 const authMeKey = ['auth', 'me'] as const;
-let queryClient: QueryClient;
 
 function clearSessionOnUnauthorized(error: unknown) {
   if (!(error instanceof HttpError) || error.status !== 401) return;
@@ -13,7 +12,7 @@ function clearSessionOnUnauthorized(error: unknown) {
   queryClient.setQueryData(authMeKey, { user: null });
 }
 
-queryClient = new QueryClient({
+const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error, query) => {
       if (query.queryKey[0] === 'auth') return;
