@@ -15,7 +15,9 @@ export class NotFoundError extends AppError {
 }
 
 export class ConflictError extends AppError {
-  constructor(message: string, details: Record<string, unknown> = {}) { super(409, 'CONFLICT', message, details); }
+  constructor(message: string, details: Record<string, unknown> = {}, code = 'CONFLICT') {
+    super(409, code, message, details);
+  }
 }
 
 export class UnauthorizedError extends AppError {
