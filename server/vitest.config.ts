@@ -9,7 +9,7 @@ export default defineConfig({
       NODE_ENV: 'test',
       DATABASE_FILE: ':memory:',
       JWT_SECRET: 'test-secret-at-least-32-characters-long',
-      LOGIN_RATE_LIMIT: '1000',
+      LOGIN_RATE_LIMIT: '2',
     },
   },
 });
