@@ -1,0 +1,5 @@
+.error { max-width: 36rem; margin: 2rem auto; padding: 1.5rem; border: 1px solid #e3c9bf; border-radius: var(--radius-md); background: #fffaf8; }
+.error h2 { margin: 0 0 .5rem; font-size: var(--text-lg); }
+.error p { margin: 0 0 1rem; color: var(--color-muted); line-height: 1.6; }
+.error button { min-height: 44px; padding: .5rem 1rem; border: 0; border-radius: var(--radius-sm); background: var(--color-accent); color: white; cursor: pointer; }
+.error button:focus-visible { outline: 3px solid #8cae9f; outline-offset: 3px; }
