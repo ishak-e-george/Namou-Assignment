@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import type Database from 'better-sqlite3';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { db, withTransaction } from './database.js';
+import { db } from './database.js';
 
 type ProductSeed = {
   title: string;
@@ -32,7 +32,7 @@ const products: ProductSeed[] = [
 ];
 
 export function seedDemoData(database: Database.Database, passwordHash: string): void {
-  withTransaction(() => {
+  database.transaction(() => {
     database.exec(`
       DELETE FROM order_items;
       DELETE FROM orders;
@@ -58,7 +58,7 @@ export function seedDemoData(database: Database.Database, passwordHash: string):
       ).lastInsertRowid);
       for (const [label, stock] of product.variants) insertVariant.run(productId, label, stock);
     }
-  });
+  }).immediate();
 }
 
 async function seed(): Promise<void> {
