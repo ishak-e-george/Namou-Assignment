@@ -1,19 +1,18 @@
 # Namou Mini Shop
 
-A small full stack shop assessment built with Express, PostgreSQL, React, and TypeScript.
+A small full stack shop assessment built with Express, SQLite, React, and TypeScript.
 
 ## Local setup
 
-1. Copy `.env.example` to `.env` and keep the development database URL and JWT secret for local use.
-2. Start PostgreSQL 16: `docker compose up -d`.
-3. Install dependencies: `npm install`.
-4. Apply the schema: `npm run migrate`.
-5. Load the repeatable demo data: `npm run seed`.
-6. Start the API and web app: `npm run dev`.
+1. Copy `.env.example` to `.env` and set a private JWT secret for local use.
+2. Install dependencies: `npm install`.
+3. Apply the schema: `npm run migrate`.
+4. Load the repeatable demo data: `npm run seed`.
+5. Start the API and web app: `npm run dev`.
 
 Open <http://localhost:5173>. The Vite server proxies `/api` requests to the API on port 3000. The API health endpoint is available at <http://localhost:5173/api/health>.
 
-The Docker initialization script creates `shop_test` the first time the database volume is initialized. To reset both local databases, run `docker compose down -v` and then `docker compose up -d`.
+The SQLite database file defaults to `server/data/shop.db`. The containing folder is created automatically. To reset the local database, delete that file and run the migration and seed commands again.
 
 ## Demo account
 
