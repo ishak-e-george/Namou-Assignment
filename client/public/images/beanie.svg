@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Ribbed Knit Beanie">
+  <rect width="128" height="160" rx="16" fill="#ead9cd"/>
+  <ellipse cx="64" cy="143" rx="36" ry="5" fill="#24332e" opacity=".1"/>
+  <path d="M39 103a25 25 0 0 1 50 0v20H39v-20Z" fill="#a75d42"/><path d="M36 102h56v18H36z" fill="#f2ede5"/><path d="M52 83v17m12-21v21m12-17v17" stroke="#f2ede5" stroke-width="3"/>
+</svg>

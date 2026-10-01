@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Oak Serving Board">
+  <rect width="128" height="160" rx="16" fill="#ebddc7"/>
+  <ellipse cx="64" cy="143" rx="36" ry="5" fill="#24332e" opacity=".1"/>
+  <path d="M47 58h34a12 12 0 0 1 12 12v62H35V70a12 12 0 0 1 12-12Z" fill="#9d7049"/><circle cx="64" cy="71" r="4" fill="#ead9bf"/>
+</svg>
