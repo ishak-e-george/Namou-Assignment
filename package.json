@@ -2,6 +2,7 @@
   "name": "namou-mini-shop",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": ["server", "client"],
   "scripts": {
     "dev": "concurrently -k -n server,client -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
@@ -9,7 +10,7 @@
     "seed": "npm run seed -w server",
     "test": "npm run test -w server && npm run test -w client",
     "lint": "eslint .",
-    "typecheck": "tsc -b"
+    "typecheck": "tsc -b server client"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

@@ -9,5 +9,6 @@
     "skipLibCheck": true,
     "noEmit": true,
     "composite": true
-  }
+  },
+  "references": [{ "path": "./server" }, { "path": "./client" }]
 }

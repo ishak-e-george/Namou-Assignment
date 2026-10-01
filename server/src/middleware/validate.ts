@@ -13,7 +13,7 @@ export function validate(schemas: { body?: ZodType; params?: ZodType }): Request
     if (schemas.params) {
       const result = schemas.params.safeParse(req.params);
       if (!result.success) details.params = result.error.flatten();
-      else req.params = result.data;
+      else req.params = result.data as typeof req.params;
     }
     if (Object.keys(details).length) return next(new ValidationError(undefined, details));
     next();
