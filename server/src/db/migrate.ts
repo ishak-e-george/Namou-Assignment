@@ -1,32 +1,39 @@
-import { readdir, readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import Database from 'better-sqlite3';
+import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { pool, withTransaction } from './pool.js';
+import { fileURLToPath } from 'node:url';
+import { db } from './database.js';
 
 const directory = path.join(path.dirname(fileURLToPath(import.meta.url)), 'migrations');
 
-async function migrate(): Promise<void> {
-  await pool.query(`CREATE TABLE IF NOT EXISTS schema_migrations (
-    version text PRIMARY KEY,
-    applied_at timestamptz NOT NULL DEFAULT now()
-  )`);
+export function runMigrations(database: Database.Database): void {
+  database.exec(`CREATE TABLE IF NOT EXISTS schema_migrations (
+    version TEXT PRIMARY KEY,
+    applied_at TEXT
+  ) STRICT`);
+  const files = readdirSync(directory).filter((name) => /^\d+.*\.sql$/.test(name)).sort();
+  const isApplied = database.prepare('SELECT 1 FROM schema_migrations WHERE version = ?');
+  const record = database.prepare(`INSERT INTO schema_migrations (version, applied_at)
+    VALUES (?, strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`);
 
-  const files = (await readdir(directory)).filter((name) => /^\d+.*\.sql$/.test(name)).sort();
   for (const file of files) {
-    const applied = await pool.query('SELECT 1 FROM schema_migrations WHERE version = $1', [file]);
-    if (applied.rowCount) continue;
-    const sql = await readFile(path.join(directory, file), 'utf8');
-    await withTransaction(async (client) => {
-      await client.query(sql);
-      await client.query('INSERT INTO schema_migrations (version) VALUES ($1)', [file]);
-    });
+    if (isApplied.get(file)) continue;
+    const sql = readFileSync(path.join(directory, file), 'utf8');
+    database.transaction(() => {
+      database.exec(sql);
+      record.run(file);
+    }).immediate();
     console.info(`Applied migration ${file}`);
   }
 }
 
-migrate()
-  .catch((error: unknown) => {
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try {
+    runMigrations(db);
+  } catch (error) {
     console.error('Migration failed:', error);
     process.exitCode = 1;
-  })
-  .finally(() => pool.end());
+  } finally {
+    db.close();
+  }
+}
