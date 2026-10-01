@@ -11,7 +11,7 @@ const databaseFile = env.DATABASE_FILE === ':memory:'
 
 if (databaseFile !== ':memory:') mkdirSync(path.dirname(databaseFile), { recursive: true });
 
-export const db = new Database(databaseFile);
+export const db: Database.Database = new Database(databaseFile);
 db.pragma('foreign_keys = ON');
 db.pragma('journal_mode = WAL');
 db.pragma('busy_timeout = 5000');
