@@ -30,6 +30,10 @@ The SQLite database file defaults to `server/data/shop.db`. The containing folde
 - `npm run lint` checks the repository with ESLint.
 - `npm run typecheck` checks the server and client TypeScript projects.
 
+## Automated E2E tests
+
+Run `npm run test:e2e`. Playwright starts the API and Vite app with a dedicated seeded SQLite database; install its Chromium browser once with `npx playwright install chromium`.
+
 ## Assumptions
 
 - The seeded demo user is the only account; there is no registration flow.
