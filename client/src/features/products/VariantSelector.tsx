@@ -1,10 +1,11 @@
 import type { ProductVariant } from '../../api/products.api.js';
 import styles from './VariantSelector.module.css';
 
-export function VariantSelector({ type, variants, selectedId, onSelect }: {
+export function VariantSelector({ type, variants, selectedId, disabled = false, onSelect }: {
   type: 'Size' | 'Color';
   variants: ProductVariant[];
   selectedId: number;
+  disabled?: boolean;
   onSelect: (variantId: number) => void;
 }) {
   return (
@@ -20,7 +21,7 @@ export function VariantSelector({ type, variants, selectedId, onSelect }: {
               type="button"
               key={variant.id}
               aria-pressed={selected}
-              disabled={unavailable}
+              disabled={unavailable || disabled}
               onClick={() => onSelect(variant.id)}
             >
               {variant.label}{unavailable ? ' · Out of stock' : ''}
