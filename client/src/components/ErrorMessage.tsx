@@ -7,7 +7,7 @@ export function ErrorMessage({ title, message, onRetry }: {
 }) {
   return (
     <section className={styles.error} role="alert" aria-live="polite">
-      <h2>{title}</h2>
+      <h1>{title}</h1>
       <p>{message}</p>
       <button type="button" onClick={onRetry}>Try again</button>
     </section>

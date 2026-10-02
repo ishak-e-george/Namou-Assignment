@@ -65,7 +65,7 @@ export function CartItemRow({ item }: { item: CartItem }) {
             <span className={styles.controlLabel}>Subtotal</span>
             <strong>{formatPrice(item.lineTotalCents)}</strong>
           </div>
-          <button className={styles.remove} type="button" onClick={() => void removeItem()} disabled={busy}>
+          <button className={styles.remove} type="button" aria-label={`Remove ${item.product.title} from cart`} onClick={() => void removeItem()} disabled={busy}>
             {removeMutation.isPending ? 'Removing...' : 'Remove'}
           </button>
         </div>

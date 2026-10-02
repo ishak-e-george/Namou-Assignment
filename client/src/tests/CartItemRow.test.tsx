@@ -29,6 +29,18 @@ afterEach(() => {
 });
 
 describe('CartItemRow', () => {
+  it('gives the remove action a product-specific accessible name', () => {
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <CartItemRow item={item} />
+      </QueryClientProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Remove Everyday Cotton Tee from cart' })).toBeInTheDocument();
+  });
+
   it('disables the row controls while a quantity update is pending', async () => {
     const user = userEvent.setup();
     const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
@@ -46,7 +58,7 @@ describe('CartItemRow', () => {
 
     expect(increase).toBeDisabled();
     expect(screen.getByRole('button', { name: 'M' })).toBeDisabled();
-    expect(screen.getByRole('button', { name: 'Remove' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Remove Everyday Cotton Tee from cart' })).toBeDisabled();
     expect(screen.getByText('Saving changes...')).toHaveAttribute('role', 'status');
 
     const cart: Cart = { items: [item], totalQuantity: 2, totalCents: 4800 };
