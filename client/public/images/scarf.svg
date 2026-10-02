@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Merino Wool Scarf">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Smart Thermostat">
   <rect width="128" height="160" rx="16" fill="#e6dfd3"/>
   <ellipse cx="64" cy="143" rx="36" ry="5" fill="#24332e" opacity=".1"/>
-  <path d="M43 62h42v14H43zm0 0-8 66 14 2 8-66zm42 0 8 66-14 2-8-66z" fill="#777c5b"/><path d="M43 72h42" stroke="#f2ece1" stroke-width="3"/>
+  <rect x="31" y="53" width="66" height="83" rx="11" fill="#b7b9b1"/><rect x="38" y="60" width="52" height="61" rx="7" fill="#596b68"/><text x="64" y="91" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#e7eee8">21°</text><path d="M53 105h22" stroke="#a9c1b2" stroke-width="2"/><circle cx="64" cy="129" r="2.5" fill="#7c9488"/>
 </svg>

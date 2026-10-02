@@ -1,5 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Everyday Cotton Tee">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Premium Bedding Set">
   <rect width="128" height="160" rx="16" fill="#d9e5df"/>
   <ellipse cx="64" cy="143" rx="36" ry="5" fill="#24332e" opacity=".1"/>
-  <path d="M54 74 74 58l16 9 13 20-13 9-8-8v49H47V88l-8 8-13-9 13-20 16-9Z" fill="#31594d"/><path d="M64 76q10 11 20 0" fill="none" stroke="#f7f4ed" stroke-width="3"/>
+  <rect x="37" y="62" width="53" height="28" rx="6" fill="#c4d1c8"/>
+  <path d="M41 70h45m-45 7h45" stroke="#eaf0eb" stroke-width="2" opacity=".8"/>
+  <rect x="29" y="84" width="70" height="28" rx="6" fill="#78968a"/>
+  <path d="M34 93h60m-60 8h60" stroke="#dce8df" stroke-width="2" opacity=".9"/>
+  <path d="M34 111h60v18a7 7 0 0 1-7 7H41a7 7 0 0 1-7-7v-18Z" fill="#668879"/>
+  <path d="M39 118h50m-50 8h50" stroke="#cbd9d0" stroke-width="2" opacity=".9"/>
 </svg>

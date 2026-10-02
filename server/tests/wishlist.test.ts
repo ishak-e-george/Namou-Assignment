@@ -24,11 +24,11 @@ describe('wishlist API', () => {
     expect(response.body.wishlist.totalItems).toBe(1);
     expect(response.body.wishlist.items[0]).toMatchObject({
       id: 1,
-      title: 'Everyday Cotton Tee',
+      title: 'Premium Bedding Set',
       priceCents: 2400,
       imageUrl: '/images/tee.svg',
       variantType: 'Size',
-      variants: expect.arrayContaining([expect.objectContaining({ label: 'XS', stock: 3 })]),
+      variants: expect.arrayContaining([expect.objectContaining({ label: 'Twin', stock: 3 })]),
     });
   });
 

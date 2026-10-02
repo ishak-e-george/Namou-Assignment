@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Oak Serving Board">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Coffee Table Accessory Set">
   <rect width="128" height="160" rx="16" fill="#ebddc7"/>
   <ellipse cx="64" cy="143" rx="36" ry="5" fill="#24332e" opacity=".1"/>
-  <path d="M47 58h34a12 12 0 0 1 12 12v62H35V70a12 12 0 0 1 12-12Z" fill="#9d7049"/><circle cx="64" cy="71" r="4" fill="#ead9bf"/>
+  <path d="M28 103h72l-8 28H36l-8-28Z" fill="#9d7049"/><path d="M35 99h58" stroke="#d3af7d" stroke-width="5"/><rect x="39" y="75" width="18" height="24" rx="3" fill="#75877a"/><rect x="62" y="68" width="26" height="31" rx="4" fill="#d6c4a9"/><circle cx="48" cy="70" r="7" fill="#c7a969"/>
 </svg>

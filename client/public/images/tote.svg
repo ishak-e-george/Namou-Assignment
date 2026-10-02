@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Canvas Weekend Tote">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Woven Storage Basket">
   <rect width="128" height="160" rx="16" fill="#e6dfca"/>
   <ellipse cx="64" cy="143" rx="36" ry="5" fill="#24332e" opacity=".1"/>
-  <path d="M40 77h48l6 63H34l6-63Z" fill="#777b52"/><path d="M50 79V66a14 14 0 0 1 28 0v13" fill="none" stroke="#777b52" stroke-width="6"/>
+  <path d="M40 72h48l8 67H32l8-67Z" fill="#a88d68"/><path d="M46 74V61a18 18 0 0 1 36 0v13" fill="none" stroke="#806d51" stroke-width="6"/><path d="M37 88h54M35 103h58M34 119h60M43 77l-4 59m17-62v63m18-63 4 63" stroke="#d9c6a7" stroke-width="3"/>
 </svg>

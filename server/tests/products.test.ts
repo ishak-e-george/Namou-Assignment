@@ -50,16 +50,16 @@ describe('products API', () => {
     expect(response.status).toBe(200);
     expect(response.body.product).toEqual({
       id: 1,
-      title: 'Everyday Cotton Tee',
+      title: 'Premium Bedding Set',
       description: expect.any(String),
       priceCents: 2400,
       variantType: 'Size',
       imageUrl: '/images/tee.svg',
       variants: [
-        { id: expect.any(Number), label: 'XS', stock: 3 },
-        { id: expect.any(Number), label: 'S', stock: 8 },
-        { id: expect.any(Number), label: 'M', stock: 12 },
-        { id: expect.any(Number), label: 'L', stock: 6 },
+        { id: expect.any(Number), label: 'Twin', stock: 3 },
+        { id: expect.any(Number), label: 'Full', stock: 8 },
+        { id: expect.any(Number), label: 'Queen', stock: 12 },
+        { id: expect.any(Number), label: 'King', stock: 6 },
       ],
     });
   });

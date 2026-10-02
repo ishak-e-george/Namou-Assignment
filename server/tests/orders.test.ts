@@ -31,14 +31,14 @@ describe('orders API', () => {
 
   it('places a single-item order, snapshots it, decrements stock and clears the cart', async () => {
     const agent = await loginAsDemo();
-    const variant = variantId(1, 'S');
+    const variant = variantId(1, 'Full');
     await agent.post('/api/cart/items').send({ variantId: variant, quantity: 2 });
 
     const response = await agent.post('/api/orders');
     expect(response.status).toBe(201);
     expect(response.body.order).toMatchObject({
       id: expect.any(Number), status: 'placed', totalCents: 4800,
-      items: [{ productTitle: 'Everyday Cotton Tee', variantId: variant, variantLabel: 'S', unitPriceCents: 2400, quantity: 2, lineTotalCents: 4800 }],
+      items: [{ productTitle: 'Premium Bedding Set', variantId: variant, variantLabel: 'Full', unitPriceCents: 2400, quantity: 2, lineTotalCents: 4800 }],
     });
     expect((db.prepare('SELECT stock FROM product_variants WHERE id = ?').get(variant) as { stock: number }).stock).toBe(6);
     expect((await agent.get('/api/cart')).body.cart).toEqual({ items: [], totalQuantity: 0, totalCents: 0 });
@@ -47,7 +47,7 @@ describe('orders API', () => {
 
   it('checks out multiple variants with correct integer-cent totals and stock decrements', async () => {
     const agent = await loginAsDemo();
-    const small = variantId(1, 'S');
+    const small = variantId(1, 'Full');
     const cream = variantId(5, 'Cream');
     await agent.post('/api/cart/items').send({ variantId: small, quantity: 2 });
     await agent.post('/api/cart/items').send({ variantId: cream, quantity: 3 });
@@ -72,7 +72,7 @@ describe('orders API', () => {
 
   it('rejects stock that changed after adding to cart and preserves stock, order state and cart', async () => {
     const agent = await loginAsDemo();
-    const variant = variantId(1, 'S');
+    const variant = variantId(1, 'Full');
     await agent.post('/api/cart/items').send({ variantId: variant, quantity: 3 });
     db.prepare('UPDATE product_variants SET stock = 2 WHERE id = ?').run(variant);
 
@@ -87,7 +87,7 @@ describe('orders API', () => {
 
   it('uses the current database price at checkout instead of a client-provided price', async () => {
     const agent = await loginAsDemo();
-    const variant = variantId(1, 'S');
+    const variant = variantId(1, 'Full');
     await agent.post('/api/cart/items').send({ variantId: variant, quantity: 2 });
     db.prepare('UPDATE products SET price_cents = 2751 WHERE id = 1').run();
     const response = await agent.post('/api/orders').send({ priceCents: 1, totalCents: 1 });
@@ -99,7 +99,7 @@ describe('orders API', () => {
 
   it('rolls back stock, order and cart changes when snapshot insertion fails', async () => {
     const agent = await loginAsDemo();
-    const variant = variantId(1, 'S');
+    const variant = variantId(1, 'Full');
     await agent.post('/api/cart/items').send({ variantId: variant, quantity: 2 });
     const originalStock = (db.prepare('SELECT stock FROM product_variants WHERE id = ?').get(variant) as { stock: number }).stock;
     vi.spyOn(ordersRepository, 'insertOrderItems').mockImplementation(() => { throw new Error('simulated snapshot write failure'); });
@@ -114,7 +114,7 @@ describe('orders API', () => {
 
   it('serializes simultaneous checkouts so only one order can use the cart', async () => {
     const agent = await loginAsDemo();
-    const variant = variantId(1, 'S');
+    const variant = variantId(1, 'Full');
     await agent.post('/api/cart/items').send({ variantId: variant, quantity: 2 });
 
     const responses = await Promise.all([agent.post('/api/orders'), agent.post('/api/orders')]);
@@ -132,7 +132,7 @@ describe('orders API', () => {
 
   it('allows the order owner to retrieve the confirmation data', async () => {
     const agent = await loginAsDemo();
-    await agent.post('/api/cart/items').send({ variantId: variantId(1, 'S'), quantity: 1 });
+    await agent.post('/api/cart/items').send({ variantId: variantId(1, 'Full'), quantity: 1 });
     const placed = await agent.post('/api/orders');
     const fetched = await agent.get(`/api/orders/${placed.body.order.id}`);
     expect(fetched.status).toBe(200);
@@ -163,12 +163,12 @@ describe('orders API', () => {
 
   it('keeps the purchase snapshot after product title and price change', async () => {
     const agent = await loginAsDemo();
-    await agent.post('/api/cart/items').send({ variantId: variantId(1, 'S'), quantity: 2 });
+    await agent.post('/api/cart/items').send({ variantId: variantId(1, 'Full'), quantity: 2 });
     const placed = await agent.post('/api/orders');
     db.prepare('UPDATE products SET title = ?, price_cents = ? WHERE id = 1').run('Renamed Tee', 9999);
     const fetched = await agent.get(`/api/orders/${placed.body.order.id}`);
 
-    expect(fetched.body.order.items[0]).toMatchObject({ productTitle: 'Everyday Cotton Tee', unitPriceCents: 2400, lineTotalCents: 4800 });
+    expect(fetched.body.order.items[0]).toMatchObject({ productTitle: 'Premium Bedding Set', unitPriceCents: 2400, lineTotalCents: 4800 });
     expect(fetched.body.order.totalCents).toBe(4800);
   });
 });
