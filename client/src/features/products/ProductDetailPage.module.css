@@ -8,7 +8,7 @@
 .description { margin: 0 0 1.5rem; color: var(--color-muted); line-height: 1.75; }
 .stock { display: inline-flex; min-height: 2.5rem; align-items: center; margin: 1rem 0 0; padding: .4rem .7rem; border-radius: var(--radius-sm); background: #e9f0ec; color: #25473d; font-size: .9rem; font-weight: 650; }
 .unavailable { background: #f2e9e5; color: #744333; }
-.actionArea { max-width: 30rem; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; gap: .75rem; margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px solid var(--color-line); }
+.actionArea { max-width: 30rem; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: end; gap: .55rem; margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px solid var(--color-line); }
 .quantityLabel { display: block; margin-bottom: .35rem; color: var(--color-muted); font-size: .78rem; }
 .addButton { min-height: 44px; padding: .65rem 1rem; border: 0; border-radius: var(--radius-sm); background: var(--color-accent); color: white; font-weight: 700; cursor: pointer; }
 .addButton:hover:not(:disabled) { background: var(--color-accent-hover); }

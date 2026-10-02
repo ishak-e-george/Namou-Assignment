@@ -6,6 +6,7 @@ import { ErrorMessage } from '../../components/ErrorMessage.js';
 import { Spinner } from '../../components/Spinner.js';
 import { formatPrice } from '../../lib/formatPrice.js';
 import { useAddCartItem, useCart } from '../cart/useCart.js';
+import { WishlistButton } from '../wishlist/WishlistButton.js';
 import { VariantSelector } from './VariantSelector.js';
 import { useProduct } from './useProducts.js';
 import styles from './ProductDetailPage.module.css';
@@ -117,6 +118,7 @@ export function ProductDetailPage() {
             >
               {addMutation.isPending ? 'Adding...' : addableQuantity === 0 ? 'Maximum in cart' : 'Add to Cart'}
             </button>
+            <WishlistButton productId={product.id} productTitle={product.title} />
             {addMutation.isPending && <p className={styles.actionStatus} role="status">Adding item to your cart...</p>}
             {addSuccess && <p className={styles.success} role="status">Added to cart.</p>}
             {addError && <p className={styles.actionError} role="alert">{addError}</p>}

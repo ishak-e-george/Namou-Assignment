@@ -1,6 +1,9 @@
-.card { min-width: 0; overflow: hidden; display: flex; flex-direction: column; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-card); transition: transform 160ms ease, box-shadow 160ms ease; }
+.card { position: relative; min-width: 0; overflow: hidden; display: flex; flex-direction: column; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-card); transition: transform 160ms ease, box-shadow 160ms ease; }
 .card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgb(34 48 42 / 10%); }
-.card:focus-visible { outline-color: var(--color-accent); }
+.productLink { min-width: 0; overflow: hidden; display: flex; flex: 1; flex-direction: column; color: inherit; text-decoration: none; }
+.productLink:focus-visible { outline: 3px solid var(--color-accent); outline-offset: -3px; }
+.wishlist { position: absolute; top: .5rem; right: .5rem; }
+.wishlist button { box-shadow: var(--shadow-card); }
 .imageWrap { aspect-ratio: 4 / 3; overflow: hidden; background: #f0f0e9; }
 .image { display: block; width: 100%; height: 100%; object-fit: cover; }
 .content { min-width: 0; flex: 1; padding: .8rem; display: flex; flex-direction: column; justify-content: space-between; gap: .7rem; }
