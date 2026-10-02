@@ -39,15 +39,15 @@ export function CheckoutPage() {
   return (
     <section className={styles.page} aria-labelledby="checkout-title">
       <header className={styles.heading}>
-        <p className="eyebrow">REVIEW YOUR ORDER</p>
+        <p className="eyebrow">HOME COLLECTION</p>
         <h1 id="checkout-title">Checkout</h1>
         <p>Confirm the items and total before placing your order.</p>
       </header>
       {cart.items.length === 0 ? (
         <div className={styles.empty}>
           <h2>Your cart is empty</h2>
-          <p>Add something from the catalog before checking out.</p>
-          <Link to="/">Browse the catalog</Link>
+          <p>Add a piece from the collection before checking out.</p>
+          <Link to="/cart">Return to cart</Link>
         </div>
       ) : (
         <div className={styles.layout}>
@@ -67,7 +67,7 @@ export function CheckoutPage() {
           </div>
           <aside className={styles.summary} aria-label="Order total">
             <h2>Order summary</h2>
-            <div><span>Items ({cart.totalQuantity})</span><span>{formatPrice(cart.totalCents)}</span></div>
+            <div><span>Subtotal</span><span>{formatPrice(cart.totalCents)}</span></div>
             <div className={styles.total}><span>Total</span><strong>{formatPrice(cart.totalCents)}</strong></div>
             {stockChanged && <p className={styles.stockError} role="alert">Stock changed before checkout. Please review your cart.</p>}
             {unexpectedError && <p className={styles.stockError} role="alert">We could not place your order. Please try again.</p>}
@@ -75,6 +75,7 @@ export function CheckoutPage() {
               {placeMutation.isPending ? 'Placing order…' : 'Place Order'}
             </button>
             {placeMutation.isPending && <p className={styles.pending} role="status">Submitting your order securely…</p>}
+            <p className={styles.demoNote}>No payment will be processed for this demo.</p>
             <Link className={styles.backToCart} to="/cart">Return to cart</Link>
           </aside>
         </div>

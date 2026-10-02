@@ -1,5 +1,10 @@
-.error { max-width: 36rem; margin: 2rem auto; padding: 1.5rem; border: 1px solid #e3c9bf; border-radius: var(--radius-md); background: #fffaf8; }
-.error h1 { margin: 0 0 .5rem; font-size: var(--text-lg); }
-.error p { margin: 0 0 1rem; color: var(--color-muted); line-height: 1.6; }
-.error button { min-height: 44px; padding: .5rem 1rem; border: 0; border-radius: var(--radius-sm); background: var(--color-accent); color: white; cursor: pointer; }
-.error button:focus-visible { outline: 3px solid #8cae9f; outline-offset: 3px; }
+.error { max-width: 42rem; display: flex; align-items: flex-start; gap: .95rem; margin: clamp(1rem, 5vw, 3rem) auto; padding: clamp(1.1rem, 3vw, 1.65rem); border: 1px solid #ead8d0; border-radius: var(--radius-md); background: #fffdfa; box-shadow: var(--shadow-card); }
+.icon { width: 2rem; height: 2rem; display: grid; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #fbf0eb; color: #a75d51; }
+.icon svg { width: 1.2rem; height: 1.2rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.copy { min-width: 0; }
+.copy h1 { margin: .05rem 0 .4rem; color: #243b35; font-size: 1.1rem; line-height: 1.3; }
+.copy p { margin: 0 0 .9rem; color: var(--color-muted); line-height: 1.55; }
+.copy button { min-height: 44px; padding: .55rem 1rem; border: 0; border-radius: var(--radius-sm); background: var(--color-accent); color: white; font-weight: 650; cursor: pointer; }
+.copy button:hover { background: var(--color-accent-hover); }
+.copy button:focus-visible { outline: 3px solid #77a698; outline-offset: 3px; }
+@media (max-width: 25rem) { .error { gap: .7rem; padding: 1rem; } .icon { width: 1.75rem; height: 1.75rem; } }

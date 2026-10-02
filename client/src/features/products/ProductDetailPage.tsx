@@ -76,12 +76,21 @@ export function ProductDetailPage() {
 
   return (
     <article className={styles.product}>
-      <div className={styles.imageWrap}>
-        <img src={product.imageUrl} alt={product.title} />
+      <div className={styles.visualColumn}>
+        <div className={styles.imageWrap}>
+          <img src={product.imageUrl} alt={product.title} />
+        </div>
+        <ul className={styles.benefits} aria-label="Collection qualities">
+          <li><span aria-hidden="true">✧</span><span><strong>Quality Materials</strong><small>Made for everyday use</small></span></li>
+          <li><span aria-hidden="true">⌂</span><span><strong>Thoughtful Design</strong><small>Simple, functional details</small></span></li>
+          <li><span aria-hidden="true">◇</span><span><strong>Modern Living</strong><small>For contemporary spaces</small></span></li>
+        </ul>
       </div>
       <div className={styles.details}>
-        <Link className={styles.back} to="/">Back to all products</Link>
-        <p className="eyebrow">NAMOU SHOP</p>
+        <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+          <Link to="/">Home</Link><span aria-hidden="true">/</span><Link to="/">Home Collection</Link><span aria-hidden="true">/</span><span aria-current="page">{product.title}</span>
+        </nav>
+        <p className="eyebrow">HOME COLLECTION</p>
         <h1>{product.title}</h1>
         <p className={styles.price}>{formatPrice(product.priceCents)}</p>
         <p className={styles.description}>{product.description}</p>
@@ -118,7 +127,7 @@ export function ProductDetailPage() {
             >
               {addMutation.isPending ? 'Adding...' : addableQuantity === 0 ? 'Maximum in cart' : 'Add to Cart'}
             </button>
-            <WishlistButton productId={product.id} productTitle={product.title} />
+            <WishlistButton className={styles.wishlistAction} productId={product.id} productTitle={product.title} showLabel />
             {addMutation.isPending && <p className={styles.actionStatus} role="status">Adding item to your cart...</p>}
             {addSuccess && <p className={styles.success} role="status">Added to cart.</p>}
             {addError && <p className={styles.actionError} role="alert">{addError}</p>}

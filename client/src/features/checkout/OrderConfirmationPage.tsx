@@ -25,9 +25,10 @@ export function OrderConfirmationPage() {
   return (
     <section className={styles.page} aria-labelledby="confirmation-title">
       <header className={styles.success}>
+        <span className={styles.check} aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m5 12.5 4.5 4.5L19 7" /></svg></span>
         <p className="eyebrow">ORDER PLACED</p>
-        <h1 id="confirmation-title">Thank you for your order</h1>
-        <p>Your order is confirmed. A payment was not collected for this demo.</p>
+        <h1 id="confirmation-title">Order Placed Successfully!</h1>
+        <p>Your order has been confirmed. No payment was collected for this demo.</p>
       </header>
       <div className={styles.meta}>
         <div><span>Order number</span><strong>#{order.id}</strong></div>

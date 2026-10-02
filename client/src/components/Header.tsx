@@ -22,9 +22,9 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link className="brand" to="/" aria-label="Namou Shop home">namou<span>.</span></Link>
+        <Link className="brand" to="/" aria-label="Namou Home Collection">namou<span>.</span></Link>
         <nav aria-label="Main navigation" className="main-nav">
-          <NavLink to="/">Shop</NavLink>
+          <NavLink to="/"><span className="nav-desktop">Home Collection</span><span className="nav-mobile">Home</span></NavLink>
           <NavLink to="/wishlist">Wishlist <span className="nav-count">{wishlistQuery.data?.wishlist.totalItems ?? 0}</span></NavLink>
           <NavLink to="/cart">Cart ({cartQuery.data?.cart.totalQuantity ?? 0})</NavLink>
           <button className="header-logout" type="button" onClick={handleLogout} disabled={pending}>

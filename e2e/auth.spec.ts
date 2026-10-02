@@ -10,11 +10,11 @@ test('protected cart restores the session through login and logout', async ({ pa
 
   await expect(page).toHaveURL(/\/cart$/);
   await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Your cart', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Your Cart/ })).toBeVisible();
 
   await page.reload();
-  await expect(page.getByRole('heading', { name: 'Your cart', exact: true })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Shop', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Your Cart/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Home Collection', exact: true })).toBeVisible();
 
   await page.getByRole('button', { name: 'Logout' }).click();
   await expect(page).toHaveURL(/\/login$/);

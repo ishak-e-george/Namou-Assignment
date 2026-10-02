@@ -54,10 +54,19 @@ export function LoginPage() {
 
   return (
     <main className={styles.page}>
+      <aside className={styles.visual} aria-label="Namou Home Collection">
+        <img src="/images/home-collection.svg" alt="" />
+        <div className={styles.visualCopy}>
+          <p className={styles.brand}>namou<span>.</span></p>
+          <p className={styles.visualEyebrow}>NAMOU PROPERTIES</p>
+          <h2>Home Collection</h2>
+          <p>Thoughtful essentials for modern living.</p>
+        </div>
+      </aside>
       <section className={styles.card} aria-labelledby="login-title">
-        <p className={styles.eyebrow}>NAMOU SHOP</p>
+        <p className={styles.eyebrow}>HOME COLLECTION</p>
         <h1 id="login-title">Welcome back</h1>
-        <p className={styles.intro}>Sign in to continue to your account.</p>
+        <p className={styles.intro}>Sign in to continue to the collection.</p>
         <form onSubmit={handleSubmit}>
           <div className={styles.field}>
             <label htmlFor="email">Email</label>

@@ -1,8 +1,8 @@
 .fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
-.fieldset legend { margin-bottom: .65rem; font-size: .9rem; font-weight: 650; }
+.fieldset legend { margin-bottom: .65rem; color: #30483f; font-size: .9rem; font-weight: 650; }
 .options { display: flex; flex-wrap: wrap; gap: .55rem; }
-.option { min-height: 44px; max-width: 100%; padding: .55rem .8rem; border: 1px solid var(--color-line); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-ink); cursor: pointer; }
+.option { min-height: 44px; max-width: 100%; padding: .55rem .8rem; border: 1px solid var(--color-line-strong); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-ink); cursor: pointer; }
 .option:hover:not(:disabled) { border-color: var(--color-accent); }
-.option.selected { border-color: var(--color-accent); background: #e9f0ec; box-shadow: inset 0 0 0 1px var(--color-accent); font-weight: 700; }
+.option.selected { border-color: var(--color-accent); background: var(--color-accent); color: white; box-shadow: inset 0 0 0 1px var(--color-accent); font-weight: 700; }
 .option:disabled { color: #737a76; background: #f0f0ed; cursor: not-allowed; text-decoration: line-through; }
-.option:focus-visible { outline: 3px solid #8cae9f; outline-offset: 3px; }
+.option:focus-visible { outline: 3px solid #77a698; outline-offset: 3px; }

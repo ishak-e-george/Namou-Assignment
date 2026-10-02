@@ -1,5 +1,5 @@
-.stepper { display: inline-flex; min-height: 44px; align-items: center; border: 1px solid var(--color-line); border-radius: var(--radius-sm); background: var(--color-surface); }
+.stepper { display: inline-flex; min-height: 44px; align-items: center; border: 1px solid var(--color-line-strong); border-radius: var(--radius-sm); background: var(--color-surface); }
 .stepper button { width: 44px; height: 44px; border: 0; background: transparent; color: var(--color-ink); font-size: 1.2rem; cursor: pointer; }
 .stepper output { min-width: 2rem; text-align: center; font-variant-numeric: tabular-nums; }
 .stepper button:disabled { color: #8b948f; cursor: not-allowed; }
-.stepper button:focus-visible { position: relative; z-index: 1; outline: 3px solid #8cae9f; outline-offset: -2px; }
+.stepper button:focus-visible { position: relative; z-index: 1; outline: 3px solid #77a698; outline-offset: -2px; }

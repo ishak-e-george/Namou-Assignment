@@ -1,8 +1,10 @@
 .wrapper { position: relative; z-index: 1; display: inline-flex; flex: 0 0 auto; }
-.button { display: inline-grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--color-line); border-radius: 50%; background: var(--color-surface); color: var(--color-ink); font-size: 1.35rem; line-height: 1; cursor: pointer; }
-.button:hover:not(:disabled) { border-color: var(--color-accent); }
-.button:focus-visible { outline: 3px solid #8cae9f; outline-offset: 3px; }
+.button { display: inline-grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--color-line-strong); border-radius: 50%; background: var(--color-surface); color: #5e7067; cursor: pointer; transition: border-color 150ms ease, background 150ms ease, color 150ms ease, transform 150ms ease; }
+.button:hover:not(:disabled) { border-color: #91b2a5; background: #f5faf7; transform: translateY(-1px); }
+.button:focus-visible { outline: 3px solid #77a698; outline-offset: 3px; }
 .button:disabled { cursor: wait; opacity: .65; }
-.selected { color: #8a3f45; }
+.heart { width: 1.2rem; height: 1.2rem; fill: transparent; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.selected { color: var(--color-accent); background: var(--color-accent-soft); border-color: #b8d0c6; }
+.selected .heart { fill: currentColor; }
 .srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-.error { position: absolute; top: calc(100% + .2rem); right: 0; width: max-content; max-width: min(15rem, 70vw); padding: .45rem .55rem; border-radius: var(--radius-sm); background: #fff; box-shadow: var(--shadow-card); color: #744333; font-size: .75rem; }
+.error { position: absolute; top: calc(100% + .3rem); right: 0; width: max-content; max-width: min(15rem, 70vw); padding: .55rem .65rem; border: 1px solid #ead8d0; border-radius: var(--radius-sm); background: #fffaf7; box-shadow: var(--shadow-card); color: var(--color-danger); font-size: .75rem; line-height: 1.45; }

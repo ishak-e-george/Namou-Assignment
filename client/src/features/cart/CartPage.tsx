@@ -18,15 +18,15 @@ export function CartPage() {
   return (
     <section className={styles.page} aria-labelledby="cart-title">
       <header className={styles.heading}>
-        <p className="eyebrow">NAMOU SHOP</p>
-        <h1 id="cart-title">Your cart</h1>
-        {cart.items.length > 0 && <p>{cart.totalQuantity} {cart.totalQuantity === 1 ? 'item' : 'items'}</p>}
+        <p className="eyebrow">HOME COLLECTION</p>
+        <h1 id="cart-title">Your Cart ({cart.totalQuantity})</h1>
+        {cart.items.length > 0 && <p>Thoughtful pieces, ready for your space.</p>}
       </header>
       {cart.items.length === 0 ? (
         <div className={styles.empty}>
           <h2>Your cart is empty</h2>
-          <p>Find something thoughtful for your home or everyday routine.</p>
-          <Link to="/">Continue shopping</Link>
+          <p>Discover pieces for your home.</p>
+          <Link to="/">Browse Home Collection</Link>
         </div>
       ) : (
         <div className={styles.layout}>
@@ -34,8 +34,8 @@ export function CartPage() {
             {cart.items.map((item) => <CartItemRow item={item} key={item.id} />)}
           </div>
           <aside className={styles.summary} aria-label="Cart summary">
-            <h2>Order summary</h2>
-            <div className={styles.summaryRow}><span>Items ({cart.totalQuantity})</span><span>{formatPrice(cart.totalCents)}</span></div>
+            <h2>Cart summary</h2>
+            <div className={styles.summaryRow}><span>Subtotal</span><span>{formatPrice(cart.totalCents)}</span></div>
             <div className={`${styles.summaryRow} ${styles.total}`}><span>Total</span><strong>{formatPrice(cart.totalCents)}</strong></div>
             <Link className={styles.checkoutLink} to="/checkout">Proceed to Checkout</Link>
           </aside>

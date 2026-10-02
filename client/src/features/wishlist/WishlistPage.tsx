@@ -18,15 +18,15 @@ export function WishlistPage() {
   return (
     <section aria-labelledby="wishlist-title">
       <header className={styles.intro}>
-        <p className="eyebrow">SAVED FOR LATER</p>
+        <p className="eyebrow">HOME COLLECTION</p>
         <h1 id="wishlist-title">Your wishlist</h1>
-        <p>Products you would like to keep close.</p>
+        <p>Saved pieces for your space.</p>
       </header>
       {products.length === 0 ? (
         <div className={styles.empty}>
           <h2>Your wishlist is empty</h2>
-          <p>Save products with the heart button and they will be here when you return.</p>
-          <Link to="/">Browse the catalog</Link>
+          <p>Save pieces you love and find them here whenever you return.</p>
+          <Link to="/">Explore Collection</Link>
         </div>
       ) : (
         <div className={styles.grid}>

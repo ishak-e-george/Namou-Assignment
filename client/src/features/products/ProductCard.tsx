@@ -14,23 +14,23 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className={styles.card}>
-      <Link className={styles.productLink} to={`/products/${product.id}`}>
+      <div className={styles.imageArea}>
+        <Link className={styles.productLink} to={`/products/${product.id}`} aria-label={`View ${product.title}`}>
         <div className={styles.imageWrap}>
           <img className={styles.image} src={product.imageUrl} alt={product.title} loading="lazy" />
         </div>
-      </Link>
+        </Link>
+        <WishlistButton className={styles.wishlist} productId={product.id} productTitle={product.title} />
+      </div>
       <div className={styles.content}>
         <Link className={styles.headingLink} to={`/products/${product.id}`}>
           <div className={styles.heading}>
             <h2>{product.title}</h2>
           </div>
         </Link>
-        <div className={styles.cardBottom}>
-          <Link className={styles.priceLink} to={`/products/${product.id}`}>
-            <p className={styles.price}>{formatPrice(product.priceCents)}</p>
-          </Link>
-          <WishlistButton className={styles.wishlist} productId={product.id} productTitle={product.title} />
-        </div>
+        <Link className={styles.priceLink} to={`/products/${product.id}`}>
+          <p className={styles.price}>{formatPrice(product.priceCents)}</p>
+        </Link>
         {visibleVariants.length > 0 && (
           <div className={styles.variants} aria-label={`${product.variantType} options`}>
             {visibleVariants.map((variant) => <span className={styles.chip} key={variant.id}>{variant.label}</span>)}

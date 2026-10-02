@@ -1,19 +1,22 @@
 .page { min-width: 0; }
-.heading { margin-bottom: 1.5rem; }
-.heading h1 { margin: .45rem 0 .35rem; font-size: var(--text-xl); letter-spacing: -.045em; }
+.heading { margin-bottom: 1.55rem; }
+.heading h1 { margin: .45rem 0 .35rem; color: #142d2a; font-size: clamp(1.8rem, 3vw, 2.35rem); letter-spacing: -.045em; }
 .heading > p:last-child { margin: 0; color: var(--color-muted); }
 .layout { display: grid; gap: 1.25rem; align-items: start; }
-.items { min-width: 0; display: grid; gap: .8rem; }
-.summary { padding: 1.2rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); }
-.summary h2 { margin: 0 0 1.1rem; font-size: 1.1rem; }
-.summaryRow { display: flex; justify-content: space-between; gap: 1rem; padding-block: .7rem; color: var(--color-muted); font-size: .92rem; }
+.items { min-width: 0; display: grid; gap: .75rem; }
+.summary { min-width: 0; padding: 1.25rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-card); }
+.summary h2 { margin: 0 0 1rem; font-size: 1.08rem; letter-spacing: -.02em; }
+.summaryRow { display: flex; justify-content: space-between; gap: 1rem; padding-block: .75rem; color: var(--color-muted); font-size: .9rem; }
 .summaryRow span:last-child { color: var(--color-ink); font-variant-numeric: tabular-nums; }
-.total { margin-top: .4rem; border-top: 1px solid var(--color-line); color: var(--color-ink); font-size: 1rem; font-weight: 700; }
-.total strong { font-variant-numeric: tabular-nums; }
-.checkoutLink { display: flex; min-height: 48px; align-items: center; justify-content: center; margin-top: .8rem; padding: .65rem 1rem; border-radius: var(--radius-sm); background: var(--color-accent); color: white; font-weight: 700; text-align: center; }
-.checkoutLink:focus-visible { outline: 3px solid #8cae9f; outline-offset: 3px; }
-.empty { padding: clamp(1.5rem, 6vw, 3rem); border: 1px dashed var(--color-line); border-radius: var(--radius-lg); background: var(--color-surface); text-align: center; }
-.empty h2 { margin: 0 0 .5rem; font-size: var(--text-lg); }
-.empty p { margin: 0 0 1rem; color: var(--color-muted); line-height: 1.6; }
-.empty a { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding-inline: 1rem; border-radius: var(--radius-sm); background: var(--color-accent); color: white; font-weight: 650; }
-@media (min-width: 64rem) { .layout { grid-template-columns: minmax(0, 1.8fr) minmax(16rem, .8fr); gap: 2rem; } .summary { position: sticky; top: 6rem; padding: 1.5rem; } .items { gap: 1rem; } }
+.total { margin-top: .25rem; border-top: 1px solid var(--color-line); color: var(--color-ink); font-weight: 700; }
+.total strong { color: #173e35; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.checkoutLink { width: 100%; display: flex; min-height: 48px; align-items: center; justify-content: center; margin-top: .8rem; padding: .65rem 1rem; border-radius: var(--radius-sm); background: var(--color-accent); color: white; font-weight: 700; text-align: center; transition: background 150ms ease; }
+.checkoutLink:hover { background: var(--color-accent-hover); }
+.checkoutLink:focus-visible { outline: 3px solid #77a698; outline-offset: 3px; }
+.empty { max-width: 38rem; margin-inline: auto; padding: clamp(1.8rem, 6vw, 3.2rem); border: 1px solid var(--color-line); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-card); text-align: center; }
+.empty h2 { margin: 0 0 .55rem; color: #183833; font-size: 1.3rem; }
+.empty p { margin: 0 0 1.2rem; color: var(--color-muted); line-height: 1.6; }
+.empty a { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding-inline: 1.15rem; border-radius: var(--radius-sm); background: var(--color-accent); color: white; font-weight: 650; }
+.empty a:focus-visible { outline: 3px solid #77a698; outline-offset: 3px; }
+@media (min-width: 48rem) { .layout { gap: 1.5rem; } }
+@media (min-width: 64rem) { .layout { grid-template-columns: minmax(0, 1.8fr) minmax(17rem, .8fr); gap: 2rem; } .summary { position: sticky; top: 6rem; padding: 1.5rem; } .items { gap: 1rem; } }

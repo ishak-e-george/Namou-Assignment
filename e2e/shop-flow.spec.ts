@@ -7,8 +7,8 @@ test('customer can order a seeded multi-variant product and reload confirmation'
   await page.getByRole('button', { name: 'Sign in' }).click();
 
   await expect(page).toHaveURL('/');
-  await page.getByRole('link', { name: 'Linen Button Shirt' }).first().click();
-  await expect(page.getByRole('heading', { name: 'Linen Button Shirt' })).toBeVisible();
+  await page.getByRole('link', { name: 'Cotton Bathrobe Set' }).first().click();
+  await expect(page.getByRole('heading', { name: 'Cotton Bathrobe Set' })).toBeVisible();
   await page.getByRole('button', { name: 'L', exact: true }).click();
   await expect(page.getByText('4 left in stock')).toBeVisible();
   await page.getByRole('button', { name: 'Add to Cart' }).click();
@@ -18,22 +18,22 @@ test('customer can order a seeded multi-variant product and reload confirmation'
   await page.getByRole('link', { name: 'Cart (1)' }).click();
   await expect(page.getByText('Size: L')).toBeVisible();
   await expect(page.getByText('$56.00 each')).toBeVisible();
-  await page.getByRole('button', { name: 'Increase quantity for Linen Button Shirt' }).click();
+  await page.getByRole('button', { name: 'Increase quantity for Cotton Bathrobe Set' }).click();
   await expect(page.getByText('$112.00').first()).toBeVisible();
 
   await page.getByRole('link', { name: 'Proceed to Checkout' }).click();
   await expect(page.getByRole('heading', { name: 'Checkout' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Linen Button Shirt' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Cotton Bathrobe Set' })).toBeVisible();
   await expect(page.getByText('Size: L')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Place Order' })).toBeEnabled();
   await page.getByRole('button', { name: 'Place Order' }).click();
 
   await expect(page).toHaveURL(/\/orders\/\d+$/);
-  await expect(page.getByRole('heading', { name: 'Thank you for your order' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Order Placed Successfully!' })).toBeVisible();
   await expect(page.getByText('Order number')).toBeVisible();
   await expect(page.getByText('Variant: L')).toBeVisible();
 
   await page.reload();
-  await expect(page.getByRole('heading', { name: 'Thank you for your order' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Order Placed Successfully!' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Cart (0)' })).toBeVisible();
 });
