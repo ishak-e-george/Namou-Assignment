@@ -29,6 +29,7 @@ The SQLite database file defaults to `server/data/shop.db`. The containing folde
 - `npm run test` runs the server and client test suites.
 - `npm run lint` checks the repository with ESLint.
 - `npm run typecheck` checks the server and client TypeScript projects.
+- `npm run build -w client` creates the production client build.
 
 ## Automated E2E tests
 

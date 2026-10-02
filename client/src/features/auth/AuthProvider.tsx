@@ -9,6 +9,8 @@ const authMeKey = ['auth', 'me'] as const;
 type AuthContextValue = {
   user: AuthUser | null;
   isLoading: boolean;
+  sessionRestoreError: boolean;
+  retrySessionRestore: () => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -29,6 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     retry: false,
   });
+  const { data: userData, isLoading: isUserLoading, isFetching: isUserFetching, isError: hasSessionRestoreError, refetch: retryUserQuery } = userQuery;
 
   const loginMutation = useMutation({
     mutationKey: ['auth', 'login'],
@@ -38,8 +41,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logoutMutation = useMutation({ mutationKey: ['auth', 'logout'], mutationFn: authApi.logout });
 
   const value = useMemo<AuthContextValue>(() => ({
-    user: userQuery.data?.user ?? null,
-    isLoading: userQuery.isLoading,
+    user: userData?.user ?? null,
+    isLoading: isUserLoading || isUserFetching,
+    sessionRestoreError: hasSessionRestoreError,
+    retrySessionRestore: async () => { await retryUserQuery(); },
     login: async (email, password) => { await loginMutation.mutateAsync({ email, password }); },
     logout: async () => {
       try {
@@ -49,7 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         queryClient.setQueryData(authMeKey, { user: null });
       }
     },
-  }), [userQuery.data?.user, userQuery.isLoading, loginMutation, logoutMutation, queryClient]);
+  }), [userData?.user, isUserLoading, isUserFetching, hasSessionRestoreError, retryUserQuery, loginMutation, logoutMutation, queryClient]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

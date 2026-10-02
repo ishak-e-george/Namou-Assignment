@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { HttpError } from '../../api/http.js';
 import { Spinner } from '../../components/Spinner.js';
+import { ErrorMessage } from '../../components/ErrorMessage.js';
 import { useAuth } from './useAuth.js';
 import styles from './LoginPage.module.css';
 
@@ -26,7 +27,7 @@ function errorMessage(error: unknown): string {
 }
 
 export function LoginPage() {
-  const { user, isLoading, login } = useAuth();
+  const { user, isLoading, sessionRestoreError, retrySessionRestore, login } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const destination = returnPath(location.state);
@@ -36,6 +37,9 @@ export function LoginPage() {
   const [error, setError] = useState<unknown>(null);
 
   if (isLoading) return <Spinner label="Loading your account" />;
+  if (sessionRestoreError) {
+    return <ErrorMessage title="Your session could not be checked" message="Check your connection and try again." onRetry={() => void retrySessionRestore()} />;
+  }
   if (user) return <Navigate to={destination} replace />;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
