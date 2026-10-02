@@ -37,6 +37,7 @@ export function CartPage() {
             <h2>Order summary</h2>
             <div className={styles.summaryRow}><span>Items ({cart.totalQuantity})</span><span>{formatPrice(cart.totalCents)}</span></div>
             <div className={`${styles.summaryRow} ${styles.total}`}><span>Total</span><strong>{formatPrice(cart.totalCents)}</strong></div>
+            <Link className={styles.checkoutLink} to="/checkout">Proceed to Checkout</Link>
           </aside>
         </div>
       )}

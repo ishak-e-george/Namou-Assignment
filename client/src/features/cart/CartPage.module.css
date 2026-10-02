@@ -10,6 +10,8 @@
 .summaryRow span:last-child { color: var(--color-ink); font-variant-numeric: tabular-nums; }
 .total { margin-top: .4rem; border-top: 1px solid var(--color-line); color: var(--color-ink); font-size: 1rem; font-weight: 700; }
 .total strong { font-variant-numeric: tabular-nums; }
+.checkoutLink { display: flex; min-height: 48px; align-items: center; justify-content: center; margin-top: .8rem; padding: .65rem 1rem; border-radius: var(--radius-sm); background: var(--color-accent); color: white; font-weight: 700; text-align: center; }
+.checkoutLink:focus-visible { outline: 3px solid #8cae9f; outline-offset: 3px; }
 .empty { padding: clamp(1.5rem, 6vw, 3rem); border: 1px dashed var(--color-line); border-radius: var(--radius-lg); background: var(--color-surface); text-align: center; }
 .empty h2 { margin: 0 0 .5rem; font-size: var(--text-lg); }
 .empty p { margin: 0 0 1rem; color: var(--color-muted); line-height: 1.6; }

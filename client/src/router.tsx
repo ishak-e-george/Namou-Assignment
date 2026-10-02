@@ -6,10 +6,8 @@ import { ProductDetailPage } from './features/products/ProductDetailPage.js';
 import { ProductListPage } from './features/products/ProductListPage.js';
 import { CartPage } from './features/cart/CartPage.js';
 import { WishlistPage } from './features/wishlist/WishlistPage.js';
-
-function Placeholder({ title }: { title: string }) {
-  return <section className="placeholder"><p className="eyebrow">NAMOU SHOP</p><h1>{title}</h1><p>This page will be available in a later phase.</p></section>;
-}
+import { CheckoutPage } from './features/checkout/CheckoutPage.js';
+import { OrderConfirmationPage } from './features/checkout/OrderConfirmationPage.js';
 
 export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
@@ -24,8 +22,8 @@ export const router = createBrowserRouter([
           { path: 'products/:id', element: <ProductDetailPage /> },
           { path: 'cart', element: <CartPage /> },
           { path: 'wishlist', element: <WishlistPage /> },
-          { path: 'checkout', element: <Placeholder title="Checkout" /> },
-          { path: 'orders/:id', element: <Placeholder title="Order confirmed" /> },
+          { path: 'checkout', element: <CheckoutPage /> },
+          { path: 'orders/:id', element: <OrderConfirmationPage /> },
         ],
       },
     ],
