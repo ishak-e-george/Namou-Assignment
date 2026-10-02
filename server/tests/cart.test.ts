@@ -32,7 +32,19 @@ describe('cart API', () => {
     expect(response.body.cart).toEqual({
       items: [{
         id: expect.any(Number),
-        product: { id: 1, title: 'Everyday Cotton Tee', imageUrl: '/images/tee.svg', priceCents: 2400, variantType: 'Size' },
+        product: {
+          id: 1,
+          title: 'Everyday Cotton Tee',
+          imageUrl: '/images/tee.svg',
+          priceCents: 2400,
+          variantType: 'Size',
+          variants: [
+            { id: expect.any(Number), label: 'XS', stock: 3 },
+            { id: expect.any(Number), label: 'S', stock: 8 },
+            { id: expect.any(Number), label: 'M', stock: 12 },
+            { id: expect.any(Number), label: 'L', stock: 6 },
+          ],
+        },
         variant: { id: selectedVariant, label: 'S', stock: 8 },
         quantity: 2,
         lineTotalCents: 4800,
@@ -110,6 +122,16 @@ describe('cart API', () => {
     expect(cart.body.cart.items[0].quantity).toBe(2);
   });
 
+  it.each([0, -1, 1.5])('rejects invalid patch quantity %s', async (quantity) => {
+    const agent = await loginAsDemo();
+    const added = await agent.post('/api/cart/items').send({ variantId: variantId(1, 'S'), quantity: 1 });
+    const response = await agent.patch(`/api/cart/items/${added.body.cart.items[0].id}`).send({ quantity });
+
+    expect(response.status).toBe(400);
+    expect(response.body.error.code).toBe('VALIDATION_ERROR');
+    expect((await agent.get('/api/cart')).body.cart.items[0].quantity).toBe(1);
+  });
+
   it('changes to another variant of the same product', async () => {
     const agent = await loginAsDemo();
     const xs = variantId(1, 'XS');
@@ -121,6 +143,20 @@ describe('cart API', () => {
     expect(response.body.cart.items).toHaveLength(1);
     expect(response.body.cart.items[0].variant).toEqual({ id: medium, label: 'M', stock: 12 });
     expect(response.body.cart.items[0].quantity).toBe(2);
+  });
+
+  it('rejects switching to a zero-stock variant without changing the source line', async () => {
+    const agent = await loginAsDemo();
+    const oat = variantId(4, 'Oat');
+    const charcoal = variantId(4, 'Charcoal');
+    const added = await agent.post('/api/cart/items').send({ variantId: oat, quantity: 1 });
+    const response = await agent.patch(`/api/cart/items/${added.body.cart.items[0].id}`).send({ variantId: charcoal });
+
+    expect(response.status).toBe(409);
+    expect(response.body.error.code).toBe('OUT_OF_STOCK');
+    const cart = await agent.get('/api/cart');
+    expect(cart.body.cart.items).toHaveLength(1);
+    expect(cart.body.cart.items[0].variant.id).toBe(oat);
   });
 
   it('rejects a variant from a different product without changing the cart', async () => {
