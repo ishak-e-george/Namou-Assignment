@@ -34,6 +34,7 @@ The SQLite database file defaults to `server/data/shop.db`. The containing folde
 
 - The seeded demo user is the only account; there is no registration flow.
 - Every variant of a product has the same price.
+- Prices are displayed in USD.
 - Adding items to the cart does not reserve stock; stock is checked and decremented at checkout.
 - Checkout simulates order placement and does not process payment.
 - This assessment setup does not include deployment.
