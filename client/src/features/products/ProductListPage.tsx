@@ -37,12 +37,12 @@ export function ProductListPage() {
           </ul>
         </div>
         <div className={styles.heroImage}>
-          <img src="/images/home-collection.svg" alt="A calm modern living room with a cream sofa, warm wood and greenery" fetchPriority="high" />
+          <img src="/images/catalog/living-room-hero.webp" alt="A calm modern living room with a cream sofa, warm wood and greenery" fetchPriority="high" />
         </div>
       </header>
       <div className={styles.collectionHeading}>
-        <div><p className="eyebrow">THE COLLECTION</p><h2>Considered pieces for home</h2></div>
-        <p>{products.length} selected essentials</p>
+        <div><h2>All Products</h2></div>
+        <p>{products.length} pieces</p>
       </div>
       {products.length === 0 ? (
         <p className={styles.empty}>No products are available right now.</p>

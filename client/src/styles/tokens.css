@@ -13,8 +13,8 @@
   --color-surface-soft: #faf9f5;
   --color-line: #e7e6df;
   --color-line-strong: #d9d8d0;
-  --color-accent: #0f5f4f;
-  --color-accent-hover: #0b4f42;
+  --color-accent: #0b5d4b;
+  --color-accent-hover: #084b3d;
   --color-accent-soft: #e8f0ed;
   --color-danger: #a74e49;
   --color-warning: #d38a27;
@@ -29,11 +29,11 @@
   --space-8: 2rem;
   --space-12: 3rem;
   --radius-sm: .625rem;
-  --radius-md: .875rem;
-  --radius-lg: 1.125rem;
-  --radius-xl: 1.25rem;
-  --shadow-card: 0 2px 12px rgb(20 30 24 / 5%);
-  --shadow-hover: 0 8px 24px rgb(20 30 24 / 8%);
+  --radius-md: .75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1rem;
+  --shadow-card: 0 1px 6px rgb(20 30 24 / 4%);
+  --shadow-hover: 0 5px 16px rgb(20 30 24 / 7%);
   --text-sm: .875rem;
   --text-base: 1rem;
   --text-lg: 1.25rem;

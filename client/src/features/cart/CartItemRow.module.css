@@ -22,3 +22,11 @@
   .adjustments { align-items: end; justify-content: space-between; }
   .subtotal { margin-left: 0; }
 }
+@media (min-width: 64rem) {
+  .item { grid-template-columns: 5rem minmax(0, 1fr) minmax(18rem, .8fr); gap: .85rem; padding: .7rem .8rem; }
+  .image { width: 5rem; }
+  .controls fieldset { display: flex; align-items: center; gap: .4rem; margin-bottom: .35rem; }
+  .controls fieldset legend { flex: 0 0 auto; margin: 0; font-size: .78rem; }
+  .controls fieldset > div { flex-wrap: nowrap; gap: .3rem; }
+  .controls fieldset button { min-height: 38px; padding: .35rem .55rem; font-size: .82rem; }
+}

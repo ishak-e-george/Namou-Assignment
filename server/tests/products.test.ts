@@ -25,7 +25,7 @@ describe('products API', () => {
         id: expect.any(Number),
         title: expect.any(String),
         priceCents: expect.any(Number),
-        imageUrl: expect.stringMatching(/^\/images\/.+\.svg$/),
+        imageUrl: expect.stringMatching(/^\/images\/catalog\/.+\.webp$/),
         variants: expect.any(Array),
       }));
       expect(product.variants.length).toBeGreaterThan(0);
@@ -54,7 +54,7 @@ describe('products API', () => {
       description: expect.any(String),
       priceCents: 2400,
       variantType: 'Size',
-      imageUrl: '/images/tee.svg',
+      imageUrl: '/images/catalog/bedding-detail.webp',
       variants: [
         { id: expect.any(Number), label: 'Twin', stock: 3 },
         { id: expect.any(Number), label: 'Full', stock: 8 },

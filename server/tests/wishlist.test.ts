@@ -26,7 +26,7 @@ describe('wishlist API', () => {
       id: 1,
       title: 'Premium Bedding Set',
       priceCents: 2400,
-      imageUrl: '/images/tee.svg',
+      imageUrl: '/images/catalog/bedding-detail.webp',
       variantType: 'Size',
       variants: expect.arrayContaining([expect.objectContaining({ label: 'Twin', stock: 3 })]),
     });

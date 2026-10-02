@@ -29,6 +29,7 @@ export function OrderConfirmationPage() {
         <p className="eyebrow">ORDER PLACED</p>
         <h1 id="confirmation-title">Order Placed Successfully!</h1>
         <p>Your order has been confirmed. No payment was collected for this demo.</p>
+        <Link className={styles.continue} to="/">Continue Shopping</Link>
       </header>
       <div className={styles.meta}>
         <div><span>Order number</span><strong>#{order.id}</strong></div>
@@ -52,7 +53,6 @@ export function OrderConfirmationPage() {
         <aside className={styles.summary} aria-label="Order total">
           <h2>Order total</h2>
           <div><span>Total</span><strong>{formatPrice(order.totalCents)}</strong></div>
-          <Link to="/">Continue shopping</Link>
         </aside>
       </div>
     </section>

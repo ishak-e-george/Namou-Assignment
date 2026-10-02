@@ -29,4 +29,4 @@
 .empty p { color: var(--color-muted); line-height: 1.6; }
 .empty a { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding-inline: 1rem; border-radius: var(--radius-sm); background: var(--color-accent); color: white; font-weight: 650; }
 @media (min-width: 48rem) { .layout { gap: 1.5rem; } .item { padding: 1rem; } }
-@media (min-width: 64rem) { .layout { grid-template-columns: minmax(0, 1.8fr) minmax(18rem, .8fr); gap: 2rem; } .summary { position: sticky; top: 6rem; padding: 1.5rem; } .items { gap: .9rem; } }
+@media (min-width: 64rem) { .layout { grid-template-columns: minmax(0, 1.3fr) minmax(20rem, .9fr); gap: 1.5rem; } .summary { position: sticky; top: 6rem; padding: 1.35rem; } .items { gap: .9rem; } }

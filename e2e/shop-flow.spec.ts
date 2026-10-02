@@ -10,7 +10,7 @@ test('customer can order a seeded multi-variant product and reload confirmation'
   await page.getByRole('link', { name: 'Cotton Bathrobe Set' }).first().click();
   await expect(page.getByRole('heading', { name: 'Cotton Bathrobe Set' })).toBeVisible();
   await page.getByRole('button', { name: 'L', exact: true }).click();
-  await expect(page.getByText('4 left in stock')).toBeVisible();
+  await expect(page.getByText('In stock (4 left)')).toBeVisible();
   await page.getByRole('button', { name: 'Add to Cart' }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Added to cart.' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Cart (1)' })).toBeVisible();

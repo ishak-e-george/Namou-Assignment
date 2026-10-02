@@ -55,7 +55,7 @@ export function LoginPage() {
   return (
     <main className={styles.page}>
       <aside className={styles.visual} aria-label="Namou Home Collection">
-        <img src="/images/home-collection.svg" alt="" />
+        <img src="/images/catalog/living-room-hero.webp" alt="" />
         <div className={styles.visualCopy}>
           <p className={styles.brand}>namou<span>.</span></p>
           <p className={styles.visualEyebrow}>NAMOU PROPERTIES</p>

@@ -55,7 +55,7 @@ export function ProductDetailPage() {
 
   if (!product) return <Spinner label="Loading product" />;
   const stockMessage = selectedVariant?.stock
-    ? `${selectedVariant.stock} left in stock`
+    ? selectedVariant.stock === 1 ? 'Only 1 left' : `In stock (${selectedVariant.stock} left)`
     : 'Out of stock';
   const addError = addMutation.error instanceof HttpError && addMutation.error.code === 'OUT_OF_STOCK'
     ? addMutation.error.message
@@ -81,9 +81,9 @@ export function ProductDetailPage() {
           <img src={product.imageUrl} alt={product.title} />
         </div>
         <ul className={styles.benefits} aria-label="Collection qualities">
-          <li><span aria-hidden="true">✧</span><span><strong>Quality Materials</strong><small>Made for everyday use</small></span></li>
-          <li><span aria-hidden="true">⌂</span><span><strong>Thoughtful Design</strong><small>Simple, functional details</small></span></li>
-          <li><span aria-hidden="true">◇</span><span><strong>Modern Living</strong><small>For contemporary spaces</small></span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.1 6.9L21 12l-6.9 2.1L12 21l-2.1-6.9L3 12l6.9-2.1L12 3Z" /></svg><span><strong>Quality Materials</strong><small>Made for everyday use</small></span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z" /></svg><span><strong>Thoughtful Design</strong><small>Simple, functional details</small></span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4c-8 0-13 3.7-13 10a6 6 0 0 0 6 6c6.3 0 7-8 7-16Z" /><path d="M5 21c2-4 5-7 10-10" /></svg><span><strong>Modern Living</strong><small>For contemporary spaces</small></span></li>
         </ul>
       </div>
       <div className={styles.details}>

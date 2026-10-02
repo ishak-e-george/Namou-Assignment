@@ -14,21 +14,21 @@ type ProductSeed = {
 };
 
 const products: ProductSeed[] = [
-  { title: 'Premium Bedding Set', description: 'A breathable cotton bedding set with a softly textured finish, designed for an inviting and restful bedroom.', priceCents: 2400, variantType: 'Size', image: 'tee', variants: [['Twin', 3], ['Full', 8], ['Queen', 12], ['King', 6]] },
-  { title: 'Cotton Bathrobe Set', description: 'A relaxed cotton robe with a soft hand feel and an adjustable belt for everyday comfort after bathing.', priceCents: 5600, variantType: 'Size', image: 'shirt', variants: [['S', 5], ['M', 1], ['L', 4]] },
-  { title: 'Woven Storage Basket', description: 'A sturdy woven basket for keeping blankets, linens, and everyday essentials neatly close at hand.', priceCents: 3200, variantType: 'Color', image: 'tote', variants: [['Natural', 9], ['Olive', 3], ['Ink', 7]] },
-  { title: 'Accent Cushion Cover', description: 'A tactile cushion cover with a subtle woven texture that brings a warm, considered accent to a sofa or bed.', priceCents: 2800, variantType: 'Color', image: 'beanie', variants: [['Oat', 6], ['Rust', 2], ['Charcoal', 0]] },
-  { title: 'Stoneware Cup Set', description: 'A pair of gently shaped stoneware cups with a smooth glaze, made for slow mornings and relaxed evenings.', priceCents: 2200, variantType: 'Color', image: 'mug', variants: [['Cream', 10], ['Blue', 4]] },
-  { title: 'Woven Throw Blanket', description: 'A lightweight cotton throw with a subtle woven stripe, suited to a sofa, reading chair, or the foot of a bed.', priceCents: 7400, variantType: null, image: 'throw', variants: [['Standard', 4]] },
-  { title: 'Smart Door Lock', description: 'A streamlined smart lock accessory with a clear keypad and a satin finish for a more considered entryway.', priceCents: 4600, variantType: 'Color', image: 'wallet', variants: [['Satin Nickel', 5], ['Matte Black', 6]] },
-  { title: 'Luxury Towel Set', description: 'A soft, absorbent cotton towel set with a substantial feel and a clean, understated edge.', priceCents: 1200, variantType: 'Color', image: 'socks', variants: [['Ivory', 8], ['Stone', 2]] },
-  { title: 'Welcome Mat', description: 'A durable woven entry mat with a simple natural finish to make coming home feel a little warmer.', priceCents: 1800, variantType: null, image: 'keyring', variants: [['Standard', 7]] },
-  { title: 'Linen Table Runner', description: 'A softly textured linen runner that adds an easy layer to everyday meals and relaxed gatherings.', priceCents: 3900, variantType: 'Color', image: 'apron', variants: [['Sand', 3], ['Forest', 5]] },
-  { title: 'Home Diffuser', description: 'A simple reed diffuser with a calm cedar and citrus scent, designed to bring a gentle note to living spaces.', priceCents: 3400, variantType: null, image: 'candle', variants: [['Standard', 6]] },
-  { title: 'Outdoor Lantern', description: 'A portable outdoor lantern with a softly diffused glow for patios, balconies, and quiet evenings outside.', priceCents: 4200, variantType: 'Color', image: 'washbag', variants: [['Stone', 4], ['Navy', 1]] },
-  { title: 'Coffee Table Accessory Set', description: 'A coordinated tabletop set for keeping small living-room essentials together with a warm, natural look.', priceCents: 5200, variantType: null, image: 'board', variants: [['Standard', 3]] },
-  { title: 'Smart Thermostat', description: 'A clean-lined smart thermostat accessory with a clear display and a quiet palette suited to modern interiors.', priceCents: 6800, variantType: 'Color', image: 'scarf', variants: [['White', 4], ['Slate', 2], ['Oat', 5]] },
-  { title: 'Glass Bud Vase', description: 'A compact, clear glass bud vase with a gently tapered neck. Each piece has small variations from hand finishing.', priceCents: 2600, variantType: null, image: 'vase', variants: [['Standard', 5]] },
+  { title: 'Premium Bedding Set', description: 'A breathable cotton bedding set with a softly textured finish, designed for an inviting and restful bedroom.', priceCents: 2400, variantType: 'Size', image: 'catalog/bedding-detail', variants: [['Twin', 3], ['Full', 8], ['Queen', 12], ['King', 6]] },
+  { title: 'Cotton Bathrobe Set', description: 'A relaxed cotton robe with a soft hand feel and an adjustable belt for everyday comfort after bathing.', priceCents: 5600, variantType: 'Size', image: 'catalog/bathrobe', variants: [['S', 5], ['M', 1], ['L', 4]] },
+  { title: 'Woven Storage Basket', description: 'A sturdy woven basket for keeping blankets, linens, and everyday essentials neatly close at hand.', priceCents: 3200, variantType: 'Color', image: 'catalog/basket', variants: [['Natural', 9], ['Olive', 3], ['Ink', 7]] },
+  { title: 'Accent Cushion Cover', description: 'A tactile cushion cover with a subtle woven texture that brings a warm, considered accent to a sofa or bed.', priceCents: 2800, variantType: 'Color', image: 'catalog/cushion', variants: [['Oat', 6], ['Rust', 2], ['Charcoal', 0]] },
+  { title: 'Stoneware Cup Set', description: 'A pair of gently shaped stoneware cups with a smooth glaze, made for slow mornings and relaxed evenings.', priceCents: 2200, variantType: 'Color', image: 'catalog/cups', variants: [['Cream', 10], ['Blue', 4]] },
+  { title: 'Woven Throw Blanket', description: 'A lightweight cotton throw with a subtle woven stripe, suited to a sofa, reading chair, or the foot of a bed.', priceCents: 7400, variantType: null, image: 'catalog/throw', variants: [['Standard', 4]] },
+  { title: 'Smart Door Lock', description: 'A streamlined smart lock accessory with a clear keypad and a satin finish for a more considered entryway.', priceCents: 4600, variantType: 'Color', image: 'catalog/door-lock', variants: [['Satin Nickel', 5], ['Matte Black', 6]] },
+  { title: 'Luxury Towel Set', description: 'A soft, absorbent cotton towel set with a substantial feel and a clean, understated edge.', priceCents: 1200, variantType: 'Color', image: 'catalog/towels', variants: [['Ivory', 8], ['Stone', 2]] },
+  { title: 'Welcome Mat', description: 'A durable woven entry mat with a simple natural finish to make coming home feel a little warmer.', priceCents: 1800, variantType: null, image: 'catalog/welcome-mat', variants: [['Standard', 7]] },
+  { title: 'Linen Table Runner', description: 'A softly textured linen runner that adds an easy layer to everyday meals and relaxed gatherings.', priceCents: 3900, variantType: 'Color', image: 'catalog/table-runner', variants: [['Sand', 3], ['Forest', 5]] },
+  { title: 'Home Diffuser', description: 'A simple reed diffuser with a calm cedar and citrus scent, designed to bring a gentle note to living spaces.', priceCents: 3400, variantType: null, image: 'catalog/diffuser', variants: [['Standard', 6]] },
+  { title: 'Outdoor Lantern', description: 'A portable outdoor lantern with a softly diffused glow for patios, balconies, and quiet evenings outside.', priceCents: 4200, variantType: 'Color', image: 'catalog/lantern', variants: [['Stone', 4], ['Navy', 1]] },
+  { title: 'Coffee Table Accessory Set', description: 'A coordinated tabletop set for keeping small living-room essentials together with a warm, natural look.', priceCents: 5200, variantType: null, image: 'catalog/table-accessories', variants: [['Standard', 3]] },
+  { title: 'Smart Thermostat', description: 'A clean-lined smart thermostat accessory with a clear display and a quiet palette suited to modern interiors.', priceCents: 6800, variantType: 'Color', image: 'catalog/thermostat', variants: [['White', 4], ['Slate', 2], ['Oat', 5]] },
+  { title: 'Glass Bud Vase', description: 'A compact, clear glass bud vase with a gently tapered neck. Each piece has small variations from hand finishing.', priceCents: 2600, variantType: null, image: 'catalog/bud-vase', variants: [['Standard', 5]] },
 ];
 
 export function seedDemoData(database: Database.Database, passwordHash: string): void {
@@ -54,7 +54,7 @@ export function seedDemoData(database: Database.Database, passwordHash: string):
         product.description,
         product.priceCents,
         product.variantType,
-        `/images/${product.image}.svg`,
+        `/images/${product.image}.webp`,
       ).lastInsertRowid);
       for (const [label, stock] of product.variants) insertVariant.run(productId, label, stock);
     }

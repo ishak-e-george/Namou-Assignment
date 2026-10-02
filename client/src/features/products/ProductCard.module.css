@@ -6,16 +6,17 @@
 .imageWrap { aspect-ratio: 4 / 3; overflow: hidden; background: #eee9df; }
 .image { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 260ms ease; }
 .card:hover .image { transform: scale(1.025); }
-.content { min-width: 0; flex: 1; padding: .8rem .85rem .9rem; display: flex; flex-direction: column; gap: .45rem; }
+.content { min-width: 0; flex: 1; padding: .7rem .8rem .8rem; display: flex; flex-direction: column; gap: .38rem; }
 .headingLink, .priceLink { min-width: 0; display: block; color: inherit; text-decoration: none; }
 .headingLink:focus-visible, .priceLink:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
 .heading { min-width: 0; }
 .heading h2 { display: -webkit-box; min-height: 2.5em; margin: 0; overflow: hidden; color: var(--color-ink); font-size: .9rem; line-height: 1.28; font-weight: 620; overflow-wrap: anywhere; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .price { margin: .1rem 0 .15rem; color: #183b34; font-size: .98rem; font-weight: 720; font-variant-numeric: tabular-nums; }
 .variants { display: flex; align-items: center; flex-wrap: wrap; gap: .3rem; margin-top: .15rem; }
-.chip, .more { min-height: 1.55rem; display: inline-flex; align-items: center; padding: .22rem .48rem; border: 1px solid var(--color-line); border-radius: 999px; color: #66736b; font-size: .68rem; line-height: 1.1; white-space: nowrap; }
+.chip, .more { min-height: 1.4rem; display: inline-flex; align-items: center; padding: .18rem .32rem; border: 1px solid var(--color-line); border-radius: 999px; color: #66736b; font-size: .64rem; line-height: 1.1; white-space: nowrap; }
 .more { border-style: dashed; }
+.swatch { width: .78rem; height: .78rem; flex: 0 0 auto; border: 1px solid rgb(31 49 42 / 20%); border-radius: 50%; box-shadow: inset 0 0 0 1px rgb(255 255 255 / 25%); }
 .wishlist { position: absolute; top: .55rem; right: .55rem; }
 .wishlist button { width: 2.65rem; height: 2.65rem; border-color: rgb(220 220 211 / 82%); box-shadow: 0 2px 8px rgb(20 30 24 / 9%); }
-@media (min-width: 48rem) { .content { gap: .5rem; padding: 1rem 1.05rem 1.1rem; } .heading h2 { font-size: .98rem; } .price { font-size: 1.05rem; } .imageWrap { aspect-ratio: 1 / .84; } }
+@media (min-width: 48rem) { .content { gap: .42rem; padding: .8rem .85rem .9rem; } .heading h2 { font-size: .96rem; } .price { font-size: 1.02rem; } .imageWrap { aspect-ratio: 1 / .84; } }
 @media (prefers-reduced-motion: reduce) { .card, .image { transition: none; } .card:hover, .card:hover .image { transform: none; } }

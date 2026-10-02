@@ -35,7 +35,7 @@ describe('cart API', () => {
         product: {
           id: 1,
           title: 'Premium Bedding Set',
-          imageUrl: '/images/tee.svg',
+          imageUrl: '/images/catalog/bedding-detail.webp',
           priceCents: 2400,
           variantType: 'Size',
           variants: [
