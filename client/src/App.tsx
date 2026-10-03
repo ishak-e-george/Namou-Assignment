@@ -2,6 +2,7 @@ import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@ta
 import { RouterProvider } from 'react-router-dom';
 import { HttpError } from './api/http.js';
 import { AuthProvider } from './features/auth/AuthProvider.js';
+import { retryQuery } from './lib/queryRetry.js';
 import { router } from './router.js';
 
 const authMeKey = ['auth', 'me'] as const;
@@ -26,7 +27,7 @@ const queryClient = new QueryClient({
       clearSessionOnUnauthorized(error);
     },
   }),
-  defaultOptions: { queries: { retry: 1, staleTime: 30_000, refetchOnWindowFocus: false } },
+  defaultOptions: { queries: { retry: retryQuery, staleTime: 30_000, refetchOnWindowFocus: false } },
 });
 
 export function App() {
