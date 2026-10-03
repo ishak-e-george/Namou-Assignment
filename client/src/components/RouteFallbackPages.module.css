@@ -1,0 +1,5 @@
+.page { max-width: 42rem; margin: clamp(2rem, 8vw, 5rem) auto; padding: clamp(1.5rem, 5vw, 3rem); border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-card); text-align: center; }
+.page h1 { margin: .5rem 0; color: var(--color-ink); font-size: clamp(1.8rem, 5vw, 2.5rem); }
+.page p:not(.eyebrow) { color: var(--color-muted); line-height: 1.6; }
+.page a, .page button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; margin-top: .6rem; padding: .65rem 1rem; border: 0; border-radius: var(--radius-sm); background: var(--color-accent); color: white; font: inherit; font-weight: 650; text-decoration: none; cursor: pointer; }
+.page a:focus-visible, .page button:focus-visible { outline: 3px solid #77a698; outline-offset: 3px; }
