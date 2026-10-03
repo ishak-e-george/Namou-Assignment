@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Home Diffuser">
-  <rect width="128" height="160" rx="16" fill="#f0dfd2"/>
-  <ellipse cx="64" cy="143" rx="36" ry="5" fill="#24332e" opacity=".1"/>
-  <path d="M48 90h32l7 43H41l7-43Z" fill="#b97455"/><path d="M54 90 45 52m17 38V43m8 47 12-39" stroke="#806b55" stroke-width="2.5"/><path d="M51 104h26" stroke="#f4ece4" stroke-width="3"/><path d="M55 84h18" stroke="#d6c1a5" stroke-width="5"/>
-</svg>

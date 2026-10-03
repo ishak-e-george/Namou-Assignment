@@ -11,7 +11,7 @@ const item: CartItem = {
   product: {
     id: 1,
     title: 'Everyday Cotton Tee',
-    imageUrl: '/images/tee.svg',
+    imageUrl: '/images/catalog/throw.webp',
     priceCents: 2400,
     variantType: 'Size',
     variants: [

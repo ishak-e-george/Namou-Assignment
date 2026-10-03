@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Outdoor Lantern">
-  <rect width="128" height="160" rx="16" fill="#dce2e4"/>
-  <ellipse cx="64" cy="143" rx="36" ry="5" fill="#24332e" opacity=".1"/>
-  <path d="M47 69a17 17 0 0 1 34 0" fill="none" stroke="#596d79" stroke-width="5"/><path d="m41 75 8-9h30l8 9 7 55H34l7-55Z" fill="#667987"/><path d="M47 80h34l4 39H43l4-39Z" fill="#e5c887" opacity=".9"/><path d="M42 77h44" stroke="#d9e0df" stroke-width="3"/>
-</svg>

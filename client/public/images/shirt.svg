@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" role="img" aria-label="Cotton Bathrobe Set">
-  <rect width="128" height="160" rx="16" fill="#eee3d1"/>
-  <ellipse cx="64" cy="143" rx="36" ry="5" fill="#24332e" opacity=".1"/>
-  <path d="m52 56 12 8 12-8 17 11 10 20-14 8-8-10v43H37V85l-8 10-14-8 10-20 17-11Z" transform="translate(9 0)" fill="#a88b75"/>
-  <path d="m54 64 10 18 10-18m-10 18v48m-17-34h12m10 0h12" fill="none" stroke="#f5eee4" stroke-width="3"/>
-</svg>
