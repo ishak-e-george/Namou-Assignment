@@ -11,6 +11,7 @@
     "client"
   ],
   "scripts": {
+    "setup": "npm install && node scripts/setup-env.mjs && npm run migrate && npm run seed",
     "dev": "concurrently -k -n server,client -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
     "test:e2e": "playwright test",
     "migrate": "npm run migrate -w server",

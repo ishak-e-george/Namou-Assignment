@@ -6,6 +6,12 @@ A small full stack shop assessment built with Express, SQLite, React, and TypeSc
 
 Requires Node.js 22 or newer.
 
+### Quick start
+
+Run `npm run setup`, then `npm run dev`, and open <http://localhost:5173>. Sign in with the demo account documented below.
+
+### Manual setup
+
 1. Copy `.env.example` to `.env` and set a private JWT secret for local use.
 2. Install dependencies: `npm install`.
 3. Apply the schema: `npm run migrate`.
