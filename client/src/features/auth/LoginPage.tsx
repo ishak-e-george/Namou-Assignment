@@ -7,13 +7,17 @@ import { useAuth } from './useAuth.js';
 import styles from './LoginPage.module.css';
 
 function returnPath(state: unknown): string {
-  if (!state || typeof state !== 'object' || !('from' in state)) return '/';
+  if (!state || typeof state !== 'object' || !('from' in state) || !('fromProtectedRoute' in state) || state.fromProtectedRoute !== true) return '/';
   const from = state.from;
   if (!from || typeof from !== 'object' || !('pathname' in from)) return '/';
   const pathname = from.pathname;
-  return typeof pathname === 'string' && pathname.startsWith('/') && !pathname.startsWith('//')
-    ? pathname
-    : '/';
+  if (typeof pathname !== 'string' || !pathname.startsWith('/')) return '/';
+  try {
+    const target = new URL(pathname, window.location.origin);
+    return target.origin === window.location.origin ? target.pathname : '/';
+  } catch {
+    return '/';
+  }
 }
 
 function errorMessage(error: unknown): string {

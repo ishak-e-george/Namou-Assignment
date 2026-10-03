@@ -16,6 +16,7 @@ export function Header() {
       await logout();
     } finally {
       setPending(false);
+      window.location.replace('/login?loggedOut=1');
     }
   }
 

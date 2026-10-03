@@ -11,6 +11,6 @@ export function ProtectedRoute() {
   if (sessionRestoreError) {
     return <ErrorMessage title="Your session could not be checked" message="Check your connection and try again." onRetry={() => void retrySessionRestore()} />;
   }
-  if (!user) return <Navigate to="/login" replace state={{ from: location }} />;
+  if (!user) return <Navigate to="/login" replace state={{ from: location, fromProtectedRoute: true }} />;
   return <Outlet />;
 }
