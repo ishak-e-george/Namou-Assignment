@@ -21,32 +21,28 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className={styles.card}>
-      <div className={styles.imageArea}>
-        <Link className={styles.productLink} to={`/products/${product.id}`} aria-label={`View ${product.title}`}>
+      <Link className={styles.productLink} to={`/products/${product.id}`} aria-label={`View ${product.title}`}>
+        <div className={styles.imageArea}>
         <div className={styles.imageWrap}>
           <img className={styles.image} src={product.imageUrl} alt={product.title} loading="lazy" />
         </div>
-        </Link>
-        <WishlistButton className={styles.wishlist} productId={product.id} productTitle={product.title} />
-      </div>
-      <div className={styles.content}>
-        <Link className={styles.headingLink} to={`/products/${product.id}`}>
+        </div>
+        <div className={styles.content}>
           <div className={styles.heading}>
             <h2>{product.title}</h2>
           </div>
-        </Link>
-        <Link className={styles.priceLink} to={`/products/${product.id}`}>
           <p className={styles.price}>{formatPrice(product.priceCents)}</p>
-        </Link>
           {visibleVariants.length > 0 && (
             <div className={styles.variants} aria-label={`${product.variantType} options`}>
-            {visibleVariants.map((variant) => product.variantType === 'Color'
-              ? <span className={styles.swatch} role="img" aria-label={variant.label} title={variant.label} style={{ backgroundColor: swatchColors[variant.label] ?? '#b9b9b3' }} key={variant.id} />
-              : <span className={styles.chip} key={variant.id}>{variant.label}</span>)}
-            {additionalCount > 0 && <span className={styles.more}>+{additionalCount}</span>}
-          </div>
-        )}
-      </div>
+              {visibleVariants.map((variant) => product.variantType === 'Color'
+                ? <span className={styles.swatch} role="img" aria-label={variant.label} title={variant.label} style={{ backgroundColor: swatchColors[variant.label] ?? '#b9b9b3' }} key={variant.id} />
+                : <span className={styles.chip} key={variant.id}>{variant.label}</span>)}
+              {additionalCount > 0 && <span className={styles.more}>+{additionalCount}</span>}
+            </div>
+          )}
+        </div>
+      </Link>
+        <WishlistButton className={styles.wishlist} productId={product.id} productTitle={product.title} />
     </article>
   );
 }
