@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HttpError } from '../../api/http.js';
 import type { CartItem } from '../../api/cart.api.js';
 import { QuantityStepper } from '../../components/QuantityStepper.js';
 import { formatPrice } from '../../lib/formatPrice.js';
 import { VariantSelector } from '../products/VariantSelector.js';
 import { useRemoveCartItem, useUpdateCartItem } from './useCart.js';
+import { useCart } from './useCart.js';
 import styles from './CartItemRow.module.css';
 
 function mutationError(error: unknown, fallback: string): string {
@@ -14,10 +15,22 @@ function mutationError(error: unknown, fallback: string): string {
 }
 
 export function CartItemRow({ item }: { item: CartItem }) {
+  const cartQuery = useCart();
   const updateMutation = useUpdateCartItem();
   const removeMutation = useRemoveCartItem();
   const [removeError, setRemoveError] = useState<string | null>(null);
+  const previousCartUpdate = useRef(cartQuery.dataUpdatedAt);
   const busy = updateMutation.isPending || removeMutation.isPending;
+  const invalidStock = item.variant.stock === 0 || item.quantity > item.variant.stock;
+
+  useEffect(() => {
+    if (previousCartUpdate.current !== cartQuery.dataUpdatedAt) {
+      previousCartUpdate.current = cartQuery.dataUpdatedAt;
+      if (updateMutation.error instanceof HttpError && updateMutation.error.code === 'OUT_OF_STOCK') {
+        updateMutation.reset();
+      }
+    }
+  }, [cartQuery.dataUpdatedAt, updateMutation]);
 
   async function removeItem() {
     setRemoveError(null);
@@ -29,7 +42,7 @@ export function CartItemRow({ item }: { item: CartItem }) {
   }
 
   return (
-    <article className={styles.item}>
+    <article className={`${styles.item}${invalidStock ? ` ${styles.invalidStock}` : ''}`}>
       <img className={styles.image} src={item.product.imageUrl} alt={item.product.title} />
       <div className={styles.info}>
         <h2>{item.product.title}</h2>
@@ -38,7 +51,7 @@ export function CartItemRow({ item }: { item: CartItem }) {
         {item.quantity > item.variant.stock && item.variant.stock > 0 && (
           <p className={styles.stockError}>Only {item.variant.stock} left in stock. Reduce the quantity to continue.</p>
         )}
-        {item.variant.stock === 0 && <p className={styles.stockError}>Out of stock. Remove this item to continue.</p>}
+        {item.variant.stock === 0 && <p className={styles.stockError}>Out of stock. Remove this item or switch to an available variant.</p>}
       </div>
       <div className={styles.controls}>
         {item.product.variantType && (
@@ -58,7 +71,7 @@ export function CartItemRow({ item }: { item: CartItem }) {
               value={item.quantity}
               max={item.variant.stock}
               disabled={busy || item.variant.stock === 0}
-              onChange={(quantity) => updateMutation.mutate({ itemId: item.id, changes: { quantity } })}
+              onChange={(quantity) => updateMutation.mutate({ itemId: item.id, changes: { quantity: item.quantity > item.variant.stock && item.variant.stock > 0 ? item.variant.stock : quantity } })}
             />
           </div>
           <div className={styles.subtotal}>

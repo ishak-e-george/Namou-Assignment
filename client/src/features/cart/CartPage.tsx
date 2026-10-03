@@ -15,6 +15,7 @@ export function CartPage() {
   if (!cartQuery.data) return <Spinner label="Loading your cart" />;
 
   const cart = cartQuery.data.cart;
+  const hasInvalidStock = cart.items.some((item) => item.variant.stock === 0 || item.quantity > item.variant.stock);
   return (
     <section className={styles.page} aria-labelledby="cart-title">
       <header className={styles.heading}>
@@ -37,7 +38,12 @@ export function CartPage() {
             <h2>Cart summary</h2>
             <div className={styles.summaryRow}><span>Subtotal</span><span>{formatPrice(cart.totalCents)}</span></div>
             <div className={`${styles.summaryRow} ${styles.total}`}><span>Total</span><strong>{formatPrice(cart.totalCents)}</strong></div>
-            <Link className={styles.checkoutLink} to="/checkout">Proceed to Checkout</Link>
+            {hasInvalidStock ? (
+              <>
+                <button className={styles.checkoutLink} type="button" disabled>Proceed to Checkout</button>
+                <p className={styles.stockNotice}>Update the highlighted items to continue.</p>
+              </>
+            ) : <Link className={styles.checkoutLink} to="/checkout">Proceed to Checkout</Link>}
           </aside>
         </div>
       )}

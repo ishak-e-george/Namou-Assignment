@@ -6,6 +6,7 @@
 .items { min-width: 0; display: grid; gap: .75rem; }
 .items > h2, .summary h2 { margin: 0 0 .35rem; color: #203b35; font-size: 1.08rem; letter-spacing: -.02em; }
 .item { min-width: 0; display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) auto; gap: .75rem; align-items: center; padding: .8rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-card); }
+.invalidStock { border-color: #dba99b; background: #fffdfa; }
 .item img { width: 4.5rem; aspect-ratio: 1; object-fit: cover; border: 1px solid var(--color-line); border-radius: var(--radius-sm); background: #eee9df; }
 .itemInfo { min-width: 0; }
 .itemInfo h3 { margin: 0 0 .3rem; color: #183833; font-size: .94rem; line-height: 1.35; overflow-wrap: anywhere; }

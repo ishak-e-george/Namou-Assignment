@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { HttpError } from '../../api/http.js';
 import { ErrorMessage } from '../../components/ErrorMessage.js';
@@ -13,6 +13,19 @@ export function CheckoutPage() {
   const placeMutation = usePlaceOrder();
   const navigate = useNavigate();
   const [unexpectedError, setUnexpectedError] = useState(false);
+  const [lineStockErrors, setLineStockErrors] = useState<Record<number, string>>({});
+  const [lineErrorCartVersion, setLineErrorCartVersion] = useState<number | null>(null);
+  const previousCartUpdate = useRef(cartQuery.dataUpdatedAt);
+
+  useEffect(() => {
+    if (previousCartUpdate.current !== cartQuery.dataUpdatedAt) {
+      previousCartUpdate.current = cartQuery.dataUpdatedAt;
+      if (Object.keys(lineStockErrors).length > 0 && lineErrorCartVersion !== null && cartQuery.dataUpdatedAt !== lineErrorCartVersion) {
+        setLineStockErrors({});
+        setLineErrorCartVersion(null);
+      }
+    }
+  }, [cartQuery.dataUpdatedAt, lineErrorCartVersion, lineStockErrors]);
 
   if (cartQuery.isLoading) return <Spinner label="Loading checkout review" />;
   if (cartQuery.isError) {
@@ -22,6 +35,7 @@ export function CheckoutPage() {
 
   const cart = cartQuery.data.cart;
   const stockChanged = placeMutation.error instanceof HttpError && placeMutation.error.code === 'OUT_OF_STOCK';
+  const hasInvalidStock = cart.items.some((item) => item.variant.stock === 0 || item.quantity > item.variant.stock);
 
   async function submitOrder() {
     if (placeMutation.isPending || cart.items.length === 0) return;
@@ -30,7 +44,21 @@ export function CheckoutPage() {
       const response = await placeMutation.mutateAsync();
       navigate(`/orders/${response.order.id}`);
     } catch (error) {
-      if (!(error instanceof HttpError && error.code === 'OUT_OF_STOCK')) {
+      if (error instanceof HttpError && error.code === 'OUT_OF_STOCK') {
+        const items = error.details.items;
+        if (Array.isArray(items)) {
+          const messages: Record<number, string> = {};
+          for (const entry of items) {
+            if (!entry || typeof entry !== 'object') continue;
+            const { variantId, available } = entry as { variantId?: unknown; available?: unknown };
+            if (typeof variantId === 'number' && typeof available === 'number') {
+              messages[variantId] = available > 0 ? `Only ${available} left` : 'Out of stock';
+            }
+          }
+          setLineStockErrors(messages);
+          setLineErrorCartVersion(cartQuery.dataUpdatedAt);
+        }
+      } else {
         setUnexpectedError(true);
       }
     }
@@ -54,12 +82,15 @@ export function CheckoutPage() {
           <div className={styles.items} aria-label="Items for this order">
             <h2>Items ({cart.totalQuantity})</h2>
             {cart.items.map((item) => (
-              <article className={styles.item} key={item.id}>
+              <article className={`${styles.item}${item.variant.stock === 0 || item.quantity > item.variant.stock || lineStockErrors[item.variant.id] ? ` ${styles.invalidStock}` : ''}`} key={item.id}>
                 <img src={item.product.imageUrl} alt={item.product.title} />
                 <div className={styles.itemInfo}>
                   <h3>{item.product.title}</h3>
                   {item.product.variantType && <p>{item.product.variantType}: {item.variant.label}</p>}
                   <p>{item.quantity} × {formatPrice(item.product.priceCents)}</p>
+                  {lineStockErrors[item.variant.id] && <p className={styles.stockError} role="alert">{lineStockErrors[item.variant.id]}</p>}
+                  {!lineStockErrors[item.variant.id] && item.variant.stock === 0 && <p className={styles.stockError}>Out of stock</p>}
+                  {!lineStockErrors[item.variant.id] && item.variant.stock > 0 && item.quantity > item.variant.stock && <p className={styles.stockError}>Only {item.variant.stock} left</p>}
                 </div>
                 <strong className={styles.lineTotal}>{formatPrice(item.lineTotalCents)}</strong>
               </article>
@@ -71,7 +102,8 @@ export function CheckoutPage() {
             <div className={styles.total}><span>Total</span><strong>{formatPrice(cart.totalCents)}</strong></div>
             {stockChanged && <p className={styles.stockError} role="alert">Stock changed before checkout. Please review your cart.</p>}
             {unexpectedError && <p className={styles.stockError} role="alert">We could not place your order. Please try again.</p>}
-            <button type="button" className={styles.placeButton} onClick={() => void submitOrder()} disabled={placeMutation.isPending}>
+            {hasInvalidStock && <p className={styles.stockError} role="status">Update the highlighted items to continue.</p>}
+            <button type="button" className={styles.placeButton} onClick={() => void submitOrder()} disabled={placeMutation.isPending || hasInvalidStock}>
               {placeMutation.isPending ? 'Placing order…' : 'Place Order'}
             </button>
             {placeMutation.isPending && <p className={styles.pending} role="status">Submitting your order securely…</p>}

@@ -1,4 +1,5 @@
 .item { min-width: 0; display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: .85rem; padding: .9rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-card); }
+.invalidStock { border-color: #dba99b; background: #fffdfa; }
 .image { display: block; width: 5rem; aspect-ratio: 1; object-fit: cover; border: 1px solid var(--color-line); border-radius: var(--radius-sm); background: #eee9df; }
 .info { min-width: 0; align-self: center; }
 .info h2 { margin: 0 0 .35rem; color: #183833; font-size: .98rem; line-height: 1.35; overflow-wrap: anywhere; }

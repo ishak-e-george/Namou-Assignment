@@ -4,6 +4,7 @@ import { getOrder, placeOrder } from '../../api/orders.api.js';
 import type { Order } from '../../api/orders.api.js';
 import type { CartResponse } from '../../api/cart.api.js';
 import { cartQueryKey } from '../cart/useCart.js';
+import { productQueryKey } from '../products/useProducts.js';
 
 export const orderQueryKey = (id: string) => ['orders', id] as const;
 
@@ -16,6 +17,7 @@ export function usePlaceOrder() {
         cart: { items: [], totalQuantity: 0, totalCents: 0 },
       });
       queryClient.setQueryData(orderQueryKey(String(order.id)), { order });
+      void queryClient.invalidateQueries({ queryKey: productQueryKey });
     },
     onError: (error) => {
       if (error instanceof HttpError && error.status === 409) {

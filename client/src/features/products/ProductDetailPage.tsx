@@ -125,7 +125,7 @@ export function ProductDetailPage() {
               disabled={selectedVariant.stock === 0 || addableQuantity === 0 || quantity > addableQuantity || cartQuery.isLoading || addMutation.isPending}
               onClick={() => void addSelectedVariant()}
             >
-              {addMutation.isPending ? 'Adding...' : addableQuantity === 0 ? 'Maximum in cart' : 'Add to Cart'}
+              {addMutation.isPending ? 'Adding...' : selectedVariant.stock === 0 ? 'Out of stock' : addableQuantity === 0 ? 'Maximum in cart' : 'Add to Cart'}
             </button>
             <WishlistButton className={styles.wishlistAction} productId={product.id} productTitle={product.title} showLabel />
             {addMutation.isPending && <p className={styles.actionStatus} role="status">Adding item to your cart...</p>}
