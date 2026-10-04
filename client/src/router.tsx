@@ -1,5 +1,6 @@
-import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { NotFoundPage, RouterErrorPage } from './components/RouteFallbackPages.js';
+import { ScrollToTop } from './components/ScrollToTop.js';
 import { Layout } from './components/Layout.js';
 import { LoginPage } from './features/auth/LoginPage.js';
 import { ProtectedRoute } from './features/auth/ProtectedRoute.js';
@@ -11,7 +12,7 @@ import { CheckoutPage } from './features/checkout/CheckoutPage.js';
 import { OrderConfirmationPage } from './features/checkout/OrderConfirmationPage.js';
 export const router = createBrowserRouter([
   {
-    element: <Outlet />,
+    element: <ScrollToTop />,
     errorElement: <RouterErrorPage />,
     children: [
       { path: '/login', element: <LoginPage /> },
