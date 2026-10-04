@@ -64,6 +64,32 @@ describe('products API', () => {
     });
   });
 
+  it('returns all 19 seeded local images for color variants', async () => {
+    const agent = await loginAsDemo();
+    const expected = [
+      [3, ['basket-natural', 'basket-olive', 'basket-ink']],
+      [4, ['cushion-oat', 'cushion-rust', 'cushion-charcoal']],
+      [5, ['cups-cream', 'cups-blue']],
+      [7, ['lock-satin', 'lock-black']],
+      [8, ['towels-ivory', 'towels-stone']],
+      [10, ['runner-sand', 'runner-forest']],
+      [12, ['lantern-stone', 'lantern-navy']],
+      [14, ['thermostat-white', 'thermostat-slate', 'thermostat-oat']],
+    ] as const;
+    let mappedVariants = 0;
+
+    for (const [productId, imageKeys] of expected) {
+      const response = await agent.get(`/api/products/${productId}`);
+      expect(response.status).toBe(200);
+      expect(response.body.product.variants.map((variant: { imageUrl?: string }) => variant.imageUrl))
+        .toEqual(imageKeys.map((key) => `/images/catalog/variants/${key}.webp`));
+      expect(response.body.product.imageUrl).toBe(`/images/catalog/variants/${imageKeys[0]}.webp`);
+      mappedVariants += response.body.product.variants.length;
+    }
+
+    expect(mappedVariants).toBe(19);
+  });
+
   it('returns standard-only products without a customer-selectable variant type', async () => {
     const agent = await loginAsDemo();
     const response = await agent.get('/api/products/6');

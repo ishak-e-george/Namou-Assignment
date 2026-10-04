@@ -4,6 +4,7 @@ export type ProductVariant = {
   id: number;
   label: string;
   stock: number;
+  imageUrl?: string;
 };
 
 export type Product = {

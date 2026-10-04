@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type { Product } from '../api/products.api.js';
@@ -36,7 +36,8 @@ describe('ProductDetailPage stock states', () => {
 
     expect(screen.getByRole('button', { name: /Oat.*Out of stock/ })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Rust' })).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByRole('button', { name: 'Add to Cart' })).toBeEnabled();
+    expect(screen.getAllByRole('button', { name: 'Add to Cart' })).toHaveLength(2);
+    expect(screen.getAllByRole('button', { name: 'Add to Cart' })[0]).toBeEnabled();
   });
 
   it('disables Add to Cart and clearly exposes stock state when its only variant is unavailable', () => {
@@ -46,8 +47,63 @@ describe('ProductDetailPage stock states', () => {
       variants: [{ id: 3, label: 'Stone', stock: 0 }],
     });
 
-    expect(screen.getAllByText('Out of stock')).toHaveLength(2);
+    expect(screen.getAllByText('Out of stock')[0]).toBeVisible();
     expect(screen.getByRole('button', { name: /Stone.*Out of stock/ })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Out of stock' })).toBeDisabled();
+  });
+
+  it('changes to the selected color image and restores it when switching back', () => {
+    renderProduct({
+      id: 3, title: 'Test Basket', description: 'A woven basket.', priceCents: 3200,
+      imageUrl: '/images/catalog/variants/basket-natural.webp', variantType: 'Color',
+      variants: [
+        { id: 1, label: 'Natural', stock: 9, imageUrl: '/images/catalog/variants/basket-natural.webp' },
+        { id: 2, label: 'Olive', stock: 3, imageUrl: '/images/catalog/variants/basket-olive.webp' },
+      ],
+    });
+
+    const image = screen.getByRole('img', { name: 'Test Basket in Natural' });
+    expect(image).toHaveAttribute('src', '/images/catalog/variants/basket-natural.webp');
+    fireEvent.click(screen.getByRole('button', { name: 'Olive' }));
+    expect(screen.getByRole('img', { name: 'Test Basket in Olive' })).toHaveAttribute('src', '/images/catalog/variants/basket-olive.webp');
+    fireEvent.click(screen.getByRole('button', { name: 'Natural' }));
+    expect(screen.getByRole('img', { name: 'Test Basket in Natural' })).toHaveAttribute('src', '/images/catalog/variants/basket-natural.webp');
+  });
+
+  it('falls back to the product image when the selected variant has no image', () => {
+    renderProduct({
+      id: 3, title: 'Test Basket', description: 'A woven basket.', priceCents: 3200,
+      imageUrl: '/images/catalog/basket.webp', variantType: 'Color',
+      variants: [
+        { id: 1, label: 'Natural', stock: 9 },
+        { id: 2, label: 'Olive', stock: 3, imageUrl: '/images/catalog/variants/basket-olive.webp' },
+      ],
+    });
+
+    expect(screen.getByRole('img', { name: 'Test Basket in Natural' })).toHaveAttribute('src', '/images/catalog/basket.webp');
+    fireEvent.click(screen.getByRole('button', { name: 'Olive' }));
+    expect(screen.getByRole('img', { name: 'Test Basket in Olive' })).toHaveAttribute('src', '/images/catalog/variants/basket-olive.webp');
+  });
+
+  it('shows normal stock with availability text', () => {
+    renderProduct({
+      id: 4, title: 'Test Cushion', description: 'A cushion.', priceCents: 2800,
+      imageUrl: '/images/catalog/variants/cushion-oat.webp', variantType: 'Color',
+      variants: [{ id: 1, label: 'Oat', stock: 6 }],
+    });
+    const status = screen.getByText('In stock').parentElement;
+    expect(status).toHaveTextContent('6 available');
+    expect(screen.getAllByRole('button', { name: 'Add to Cart' })[0]).toBeEnabled();
+  });
+
+  it('marks stock of two as low with a text label', () => {
+    renderProduct({
+      id: 4, title: 'Test Cushion', description: 'A cushion.', priceCents: 2800,
+      imageUrl: '/images/catalog/variants/cushion-oat.webp', variantType: 'Color',
+      variants: [{ id: 1, label: 'Rust', stock: 2 }],
+    });
+    const status = screen.getByText('Low stock').parentElement;
+    expect(status).toHaveTextContent('Only 2 available');
+    expect(screen.getAllByRole('button', { name: 'Add to Cart' })[0]).toBeEnabled();
   });
 });

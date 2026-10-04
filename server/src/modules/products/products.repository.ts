@@ -1,6 +1,6 @@
 import { db } from '../../db/database.js';
 
-export type ProductVariant = { id: number; label: string; stock: number };
+export type ProductVariant = { id: number; label: string; stock: number; imageUrl?: string };
 export type Product = {
   id: number;
   title: string;
@@ -21,6 +21,7 @@ type ProductRow = {
   variant_id: number | null;
   variant_label: string | null;
   stock: number | null;
+  variant_image_url: string | null;
 };
 
 function mapRows(rows: ProductRow[]): Product[] {
@@ -40,7 +41,12 @@ function mapRows(rows: ProductRow[]): Product[] {
       products.set(row.id, product);
     }
     if (row.variant_id !== null && row.variant_label !== null && row.stock !== null) {
-      product.variants.push({ id: row.variant_id, label: row.variant_label, stock: row.stock });
+      product.variants.push({
+        id: row.variant_id,
+        label: row.variant_label,
+        stock: row.stock,
+        ...(row.variant_image_url === null ? {} : { imageUrl: row.variant_image_url }),
+      });
     }
   }
   return [...products.values()];
@@ -48,7 +54,7 @@ function mapRows(rows: ProductRow[]): Product[] {
 
 const listStatement = db.prepare(`
   SELECT p.id, p.title, NULL AS description, p.price_cents, p.variant_type, p.image_url,
-         v.id AS variant_id, v.label AS variant_label, v.stock
+         v.id AS variant_id, v.label AS variant_label, v.stock, v.image_url AS variant_image_url
   FROM products p
   LEFT JOIN product_variants v ON v.product_id = p.id
   ORDER BY p.id, v.id
@@ -56,7 +62,7 @@ const listStatement = db.prepare(`
 
 const detailStatement = db.prepare(`
   SELECT p.id, p.title, p.description, p.price_cents, p.variant_type, p.image_url,
-         v.id AS variant_id, v.label AS variant_label, v.stock
+         v.id AS variant_id, v.label AS variant_label, v.stock, v.image_url AS variant_image_url
   FROM products p
   LEFT JOIN product_variants v ON v.product_id = p.id
   WHERE p.id = ?

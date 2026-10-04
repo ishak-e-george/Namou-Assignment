@@ -54,9 +54,12 @@ export function ProductDetailPage() {
   }
 
   if (!product) return <Spinner label="Loading product" />;
-  const stockMessage = selectedVariant?.stock
-    ? selectedVariant.stock === 1 ? 'Only 1 left' : `In stock (${selectedVariant.stock} left)`
-    : 'Out of stock';
+  const stockLabel = selectedVariant?.stock === 0
+    ? 'Out of stock'
+    : selectedVariant && selectedVariant.stock <= 2 ? 'Low stock' : 'In stock';
+  const stockAvailability = selectedVariant && selectedVariant.stock > 0
+    ? selectedVariant.stock <= 2 ? `Only ${selectedVariant.stock} available` : `${selectedVariant.stock} available`
+    : null;
   const addError = addMutation.error instanceof HttpError && addMutation.error.code === 'OUT_OF_STOCK'
     ? addMutation.error.message
     : addMutation.isError
@@ -77,8 +80,12 @@ export function ProductDetailPage() {
   return (
     <article className={styles.product}>
       <div className={styles.visualColumn}>
-        <div className={styles.imageWrap}>
-          <img src={product.imageUrl} alt={product.title} />
+        <div className={`${styles.imageWrap}${product.variantType === 'Color' ? ` ${styles.colorImage}` : ''}`}>
+          <img
+            key={selectedVariant?.id ?? product.id}
+            src={selectedVariant?.imageUrl ?? product.imageUrl}
+            alt={`${product.title}${product.variantType === 'Color' && selectedVariant ? ` in ${selectedVariant.label}` : ''}`}
+          />
         </div>
         <ul className={styles.benefits} aria-label="Collection qualities">
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.1 6.9L21 12l-6.9 2.1L12 21l-2.1-6.9L3 12l6.9-2.1L12 3Z" /></svg><span><strong>Quality Materials</strong><small>Made for everyday use</small></span></li>
@@ -103,9 +110,10 @@ export function ProductDetailPage() {
           />
         )}
         {selectedVariant && (
-          <p className={`${styles.stock}${selectedVariant.stock === 0 ? ` ${styles.unavailable}` : ''}`} aria-live="polite">
-            {stockMessage}
-          </p>
+          <div className={`${styles.stock} ${selectedVariant.stock === 0 ? styles.unavailable : selectedVariant.stock <= 2 ? styles.lowStock : ''}`} role="status" aria-live="polite">
+            <span className={styles.stockLabel}>{stockLabel}</span>
+            {stockAvailability && <span className={styles.stockAvailability}>{stockAvailability}</span>}
+          </div>
         )}
         {selectedVariant && (
           <div className={styles.actionArea}>
@@ -135,6 +143,22 @@ export function ProductDetailPage() {
           </div>
         )}
       </div>
+      {selectedVariant && selectedVariant.stock > 0 && addableQuantity > 0 && (
+        <div className={styles.mobilePurchase}>
+          <span className={styles.mobilePurchaseContext}>
+            <strong>{formatPrice(product.priceCents)}</strong>
+            {product.variantType === 'Color' && <small>{selectedVariant.label}</small>}
+          </span>
+          <button
+            className={styles.mobileAddButton}
+            type="button"
+            disabled={cartQuery.isLoading || addMutation.isPending || quantity > addableQuantity}
+            onClick={() => void addSelectedVariant()}
+          >
+            {addMutation.isPending ? 'Adding...' : 'Add to Cart'}
+          </button>
+        </div>
+      )}
     </article>
   );
 }
