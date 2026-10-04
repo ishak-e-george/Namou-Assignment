@@ -18,10 +18,12 @@ function response(status: number, payload?: unknown) {
   };
 }
 
-function setup(initialEntry: string | { pathname: string; state?: unknown } = '/login') {
+function setup(initialEntry: string | { pathname: string; state?: unknown } = '/login', meStatus = 401) {
   const fetchMock = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
     const path = String(input);
-    if (path === '/api/auth/me') return response(401, { error: { code: 'UNAUTHORIZED', message: 'Authentication required', details: {} } });
+    if (path === '/api/auth/me') return meStatus === 200
+      ? response(200, { user: demoUser })
+      : response(401, { error: { code: 'UNAUTHORIZED', message: 'Authentication required', details: {} } });
     if (path === '/api/auth/login') return response(200, { user: demoUser });
     if (path === '/api/auth/logout') return response(204);
     if (path === '/api/cart') return response(200, { cart: { items: [], totalQuantity: 0, totalCents: 0 } });
@@ -64,6 +66,17 @@ afterEach(() => {
 });
 
 describe('login destination', () => {
+  it('shows Home Collection at the root for an authenticated visit', async () => {
+    setup('/', 200);
+    expect(await screen.findByRole('heading', { name: 'Home route' })).toBeInTheDocument();
+  });
+
+  it('returns a logged-out root visit to Home Collection after login', async () => {
+    setup('/');
+    await login();
+    expect(await screen.findByRole('heading', { name: 'Home route' })).toBeInTheDocument();
+  });
+
   it('sends a direct login to home', async () => {
     setup('/login');
     await login();
