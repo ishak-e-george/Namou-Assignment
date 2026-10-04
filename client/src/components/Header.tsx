@@ -36,7 +36,7 @@ export function Header() {
           </NavLink>
           <NavLink className="nav-cart" to="/cart" aria-label={`Cart (${cartQuery.data?.cart.totalQuantity ?? 0})`}>
             <svg className="header-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 1.9-1.4L21 8H6" /><circle cx="10" cy="20" r="1" /><circle cx="18" cy="20" r="1" /></svg>
-            <span className="nav-desktop">Cart ({cartQuery.data?.cart.totalQuantity ?? 0})</span>
+            <span className="nav-desktop">Cart (<span className="nav-count">{cartQuery.data?.cart.totalQuantity ?? 0}</span>)</span>
             <span className="nav-mobile nav-count">{cartQuery.data?.cart.totalQuantity ?? 0}</span>
           </NavLink>
           <button className="header-logout" type="button" onClick={handleLogout} disabled={pending}>

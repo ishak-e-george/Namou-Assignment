@@ -48,6 +48,7 @@ describe('ProductDetailPage stock states', () => {
     });
 
     expect(screen.getAllByText('Out of stock')[0]).toBeVisible();
+    expect(screen.getByText('No units available')).toBeVisible();
     expect(screen.getByRole('button', { name: /Stone.*Out of stock/ })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Out of stock' })).toBeDisabled();
   });

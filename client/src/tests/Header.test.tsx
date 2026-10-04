@@ -10,10 +10,10 @@ vi.mock('../features/auth/useAuth.js', () => ({ useAuth: () => ({ logout: vi.fn(
 
 afterEach(cleanup);
 
-describe('Header wishlist count', () => {
-  it.each([0, 1, 3])('shows Wishlist (%i)', (count) => {
+describe('Header cart and wishlist counts', () => {
+  it.each([0, 1, 3])('shows both counts with the shared accent class at %i', (count) => {
     const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-    client.setQueryData(cartQueryKey, { cart: { items: [], totalQuantity: 0, totalCents: 0 } });
+    client.setQueryData(cartQueryKey, { cart: { items: [], totalQuantity: count, totalCents: 0 } });
     client.setQueryData(wishlistQueryKey, { wishlist: { items: [], totalItems: count } });
 
     render(
@@ -23,5 +23,10 @@ describe('Header wishlist count', () => {
     );
 
     expect(screen.getByRole('link', { name: `Wishlist (${count})` })).toHaveTextContent(`Wishlist (${count})`);
+    expect(screen.getByRole('link', { name: `Cart (${count})` })).toHaveTextContent(`Cart (${count})`);
+    const wishlist = screen.getByRole('link', { name: `Wishlist (${count})` });
+    const cart = screen.getByRole('link', { name: `Cart (${count})` });
+    expect(wishlist.querySelector('.nav-count')).not.toBeNull();
+    expect(cart.querySelector('.nav-count')).not.toBeNull();
   });
 });

@@ -59,7 +59,7 @@ export function ProductDetailPage() {
     : selectedVariant && selectedVariant.stock <= 2 ? 'Low stock' : 'In stock';
   const stockAvailability = selectedVariant && selectedVariant.stock > 0
     ? selectedVariant.stock <= 2 ? `Only ${selectedVariant.stock} available` : `${selectedVariant.stock} available`
-    : null;
+    : selectedVariant ? 'No units available' : null;
   const addError = addMutation.error instanceof HttpError && addMutation.error.code === 'OUT_OF_STOCK'
     ? addMutation.error.message
     : addMutation.isError
